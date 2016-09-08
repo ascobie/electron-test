@@ -1,0 +1,19 @@
+{
+  "name": "electron-test",
+  "version": "1.0.0",
+  "description": "demo project for playing around with electron, angular, bootstrap, etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "runme"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nz-andy/electron-test.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nz-andy/electron-test/issues"
+  },
+  "homepage": "https://github.com/nz-andy/electron-test#readme"
+}
