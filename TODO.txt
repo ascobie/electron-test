@@ -1,0 +1,6 @@
+﻿npm install (installs whatever is in the devDependencies)
+add node-modules/.bin to the PATH
+
+npm install -g gulp
+npm install gulp --save-dev (adds it to devDependencies in package.json)
+
