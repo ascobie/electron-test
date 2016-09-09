@@ -1,6 +1,15 @@
-﻿npm install (installs whatever is in the devDependencies)
+﻿# From ... 
+# https://scotch.io/tutorials/creating-desktop-applications-with-angularjs-and-github-electron
+
+npm install (installs whatever is in the devDependencies)
 add node-modules/.bin to the PATH
 
 npm install -g gulp
 npm install gulp --save-dev (adds it to devDependencies in package.json)
+
+npm install -g bower
+
+npm install --save gulp-uglify gulp-minify-css gulp-usemin
+
+npm install --save q asar fs-jetpack recedit.
 
