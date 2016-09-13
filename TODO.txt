@@ -12,4 +12,9 @@ npm install -g bower
 npm install --save gulp-uglify gulp-minify-css gulp-usemin
 
 npm install --save q asar fs-jetpack recedit.
+npm install -g less
 
+lessc assets/css/main.less assets/css/main.css
+lessc --clean-css assets/css/main.less assets/css/main.min.css
+
+npm install gulp-less

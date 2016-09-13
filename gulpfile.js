@@ -1,22 +1,30 @@
 ﻿// get the dependencies
-var gulp         = require('gulp'); 
-var childProcess = require('child_process'); 
-var electron     = require('electron-prebuilt'); 
-var jetpack      = require('fs-jetpack'); 
-var usemin       = require('gulp-usemin'); 
-var uglify       = require('gulp-uglify');
+var gulp            = require('gulp'); 
+var less            = require('gulp-less')
+var childProcess    = require('child_process'); 
+var electron        = require('electron-prebuilt'); 
+var jetpack         = require('fs-jetpack'); 
+var usemin          = require('gulp-usemin'); 
+var uglify          = require('gulp-uglify');
 
-var projectDir = jetpack; 
-var srcDir     = projectDir.cwd('./app'); 
-var destDir    = projectDir.cwd('./build');
+var projectDir      = jetpack; 
+var srcDir          = projectDir.cwd('./app'); 
+var destDir         = projectDir.cwd('./build');
 
 // for builds 
 var release_windows = require('./build.windows'); 
 var os = require('os'); 
 
 // create the gulp task
-gulp.task('run', function () {
-    childProcess.spawn(electron, ['./app'], { stdio: 'inherit' });
+gulp.task('run', ['build-less'], function () {
+    // childProcess.spawn(electron, ['./app'], { stdio: 'inherit' });
+    childProcess.spawn(electron, ['--debug=5858','./app'], { stdio: 'inherit' }); 
+});
+
+gulp.task('build-less', function(){
+    return gulp.src('./app/assets/css/main.less')
+        .pipe(less())
+        .pipe(gulp.dest('./app/assets/css'));
 });
 
 // clean build directory if it already exists.

@@ -1,0 +1,7 @@
+
+<md-list class="my-grid" style="width:80%;border: 1px solid #CCC;padding:0px">
+    <md-list-item md-ink-ripple="#03A9F4" ng-repeat="subscription in _ctrl.subscriptions">
+        <p> {{subscription.name}} </p>
+        <md-checkbox class="md-secondary" ng-model="subscription.wanted" ng-click="_ctrl.selectSubscription(subscription, $index)"></md-checkbox>
+    </md-list-item>
+</md-list>

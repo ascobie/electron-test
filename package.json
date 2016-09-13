@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.17",
+    "azure": "^1.2.0-preview",
     "es6-shim": "^0.35.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-uglify": "^2.0.0",
