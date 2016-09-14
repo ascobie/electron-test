@@ -18,3 +18,9 @@ lessc assets/css/main.less assets/css/main.css
 lessc --clean-css assets/css/main.less assets/css/main.min.css
 
 npm install gulp-less
+
+https://github.com/Cecildt/angular2-O365-desktop-app/blob/master/src/home/home.ts
+
+https://devlaundry.com/office-365-desktop-application-with-angular-2-and-electron/
+https://github.com/Cecildt/angular2-O365-desktop-app
+

@@ -1,12 +1,10 @@
 (function () {
     'use strict';
 
-    console.log("SubscriptionController");
-
     angular.module('app')
-        .controller('subscriptionController', ['subscriptionService', '$q', '$mdDialog', SubscriptionController]);
+        .controller('subscriptionController', ['subscriptionService', 'electronService', '$q', '$mdDialog', 'adalAuthenticationService', SubscriptionController]);
     
-    function SubscriptionController(subscriptionService, $q, $mdDialog) {
+    function SubscriptionController(subscriptionService, electronService, $q, $mdDialog, adalService) {
         var self = this;
 
         self.selected = null;
@@ -14,10 +12,11 @@
         self.selectedIndex = 0;
         self.filterText = null;
         self.selectSubscription = selectSubscription;
-        
+        self.info = {};
+
         // Load initial data
-        console.log("should be calling: getAllSubscriptions");
         getAllSubscriptions();
+        loadInfo();
         
         //----------------------
         // Internal functions 
@@ -32,11 +31,17 @@
         function getAllSubscriptions() {
             console.log("SubscriptionController.getAllSubscriptions");
             subscriptionService.list().then(function (subscriptions) {
-                console.log("got: ", subscriptions);
                 self.subscriptions = [].concat(subscriptions);
                 self.selected = subscriptions[0];
             });
         }
-    }
 
+        function loadInfo() {
+            console.log("SubscriptionController.loadInfo");
+            electronService.info().then(function (response) {
+                console.log(response);
+                self.info = response;
+            });
+        }
+    }
 })();

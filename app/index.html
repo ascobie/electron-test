@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
+    <!--base href="./" /-->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -86,11 +87,7 @@
                 <div class="wrapper">
                     <section class="page-intro">
                         <h1>My Subscriptions</h1>
-                        <p>
-                            We are using Electron
-                            <script> document.write(process.versions['electron']) </script> on
-                            <script> document.write(process.platform) </script>
-                        </p>
+                        <p>Subscriptions that you are authorized to view</p>
                     </section>
                     <div id="dynamic-body">
                         <ng-view></ng-view>
@@ -107,6 +104,7 @@
                         <script src="./scripts/adal-angular.js"></script>
                         <script src="./scripts/subscription/subscriptionService.js"></script>
                         <script src="./scripts/subscription/subscriptionController.js"></script>
+                        <script src="./scripts/services/electronService.js"></script>
                         <!-- endbuild -->
                     </div>
                 </div>

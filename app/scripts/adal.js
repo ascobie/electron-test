@@ -826,6 +826,9 @@ AuthenticationContext.prototype._decodeJwt = function (jwtToken) {
     var matches = idTokenPartsRegex.exec(jwtToken);
     if (!matches || matches.length < 4) {
         this._logstatus('The returned id_token is not parseable.');
+        //this._logstatus('jwtToken: ' + jwtToken);
+        //this._logstatus('matches: ' + matches);
+        
         return null;
     }
 
