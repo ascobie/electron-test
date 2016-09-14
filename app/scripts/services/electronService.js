@@ -16,7 +16,6 @@
 
             $http.get("http://localhost:3000/info").then(
                 function (response) {
-                    console.log(response.data);
                     deferred.resolve(response.data); 
                 }, function (error) {
                     deferred.reject(error); 

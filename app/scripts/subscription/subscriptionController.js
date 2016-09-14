@@ -39,7 +39,6 @@
         function loadInfo() {
             console.log("SubscriptionController.loadInfo");
             electronService.info().then(function (response) {
-                console.log(response);
                 self.info = response;
             });
         }

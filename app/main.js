@@ -3,7 +3,25 @@ const electron = require('electron');
 const { app, BrowserWindow } = electron;
 
 const restify = require('restify');
-
+/*
+const url = require('url');
+const crypto = require('crypto');
+const AuthenticationContext = require('adal-node').AuthenticationContext;
+const AdalMainConfig = {
+    instance: 'https://login.microsoftonline.com/', 
+    authorityHostUrl:'https://login.windows.net',
+    tenant: 'microsoft.onmicrosoft.com',
+    clientId: '38bd798b-779f-4866-9b25-708883817b33',
+    clientSecret: '',
+    extraQueryParameter: 'nux=1',
+    resource: "https://graph.microsoft.com",
+    //redirectUri:  "http://localhost:3000/auth/azureoauth/callback",
+    postLogoutRedirectUri: "",
+    endpoints: {
+        graphApiUri:'https://graph.microsoft.com'
+    }
+}
+*/
 let mainWindow = null;
 
 // Allows for live-reload while developing the app
@@ -52,7 +70,11 @@ app.on('activate', function () {
 
 // ADAL Settings
 let authToken = '';
+//let authorityUrl = AdalMainConfig.authorityHostUrl + '/' + AdalMainConfig.tenant;
+//let templateAuthzUrl = 'https://login.windows.net/' + AdalMainConfig.tenant + '/oauth2/authorize?response_type=code&client_id=<client_id>&redirect_uri=<redirect_uri>&state=<state>&resource=<resource>';
+//let tenantID = '';
 let accessToken = '';
+//let refreshToken = '';
 let user = {
     userID: '',
     lastName: '',
@@ -84,56 +106,9 @@ server.get('/auth/azureoauth/callback', (req, res, next) => {
   // }
   
     console.log("CALLBACK: /auth/azureoauth/callback");
-
-  /*
-  clearStorage();
-
-  var authenticationContext = new AuthenticationContext(authorityUrl);
-  authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, AdalMainConfig.redirectUri, AdalMainConfig.resource, AdalMainConfig.clientId, AdalMainConfig.clientSecret, function (err, response) {
-    var message = '';
-    if (err) {
-      message = 'error: ' + err.message + '\n';
-      logError(message);
-      return;
-    }
-
-    accessToken = response.accessToken;
-    refreshToken = response.refreshToken;
-    tenantID = response.tenantId;
-    user.userID = response.userId;
-    user.lastName = response.familyName;
-    user.firstName = response.firstName;
-    user.fullName = response.firstName + ' ' + response.familyName;
-
-    // console.log("User: " + JSON.stringify(user));
-    // console.log("Access Token: " + response.accessToken);
-    // console.log("Refresh Token:" + response.refreshToken);
-
-    saveTokens();
-    saveUser();
-
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
-
-    // Later, if the access token is expired it can be refreshed.
-    authenticationContext.acquireTokenWithRefreshToken(response.refreshToken, AdalMainConfig.clientId, AdalMainConfig.clientSecret, AdalMainConfig.resource, function (refreshErr, refreshResponse) {
-      if (refreshErr) {
-        message += 'refreshError: ' + refreshErr.message + '\n';
-        logError(message);
-      }
-
-      accessToken = response.accessToken;
-      refreshToken = response.refreshToken;
-      tenantID = response.tenantId;
-      user.userID = response.userId;
-      user.lastName = response.familyName;
-      user.firstName = response.firstName;
-      user.fullName = response.firstName + ' ' + response.familyName;
-
-      saveTokens();
-      saveUser();
-    });
-  });
-  */
+    console.log("req: " + req);
+    console.log("res: " + res);
+    console.log("next: " + next);
 });
 
 server.listen(port, () => {
@@ -141,21 +116,21 @@ server.listen(port, () => {
 });
 
 function logError(message) {
-  let code = "localStorage.setItem('error', '" + message + "');";
+  let code = "window.localStorage.setItem('error', '" + message + "');";
   mainWindow.webContents.executeJavaScript(code);
 }
 
 function saveTokens() {
-  let code = "localStorage.setItem('accessToken', '" + accessToken + "');";
+  let code = "window.localStorage.setItem('accessToken', '" + accessToken + "');";
   mainWindow.webContents.executeJavaScript(code);
 }
 
 function saveUser() {
-  let code = "localStorage.setItem('user', '" + JSON.stringify(user) + "');";
+  let code = "window.localStorage.setItem('user', '" + JSON.stringify(user) + "');";
   mainWindow.webContents.executeJavaScript(code);
 }
 
 function clearStorage(){
-  let code = "localStorage.clear()";
+  let code = "window.localStorage.clear()";
   mainWindow.webContents.executeJavaScript(code);
 }
