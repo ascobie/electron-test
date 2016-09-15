@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('app')
+    angular
+        .module('app')
         .controller('subscriptionController', ['subscriptionService', 'electronService', '$q', '$mdDialog', 'adalAuthenticationService', SubscriptionController]);
     
     function SubscriptionController(subscriptionService, electronService, $q, $mdDialog, adalService) {
@@ -38,6 +39,7 @@
 
         function loadInfo() {
             console.log("SubscriptionController.loadInfo");
+            console.log(adalService.userInfo)
             electronService.info().then(function (response) {
                 self.info = response;
             });

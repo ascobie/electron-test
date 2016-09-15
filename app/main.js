@@ -1,27 +1,23 @@
 
 const electron = require('electron');
 const { app, BrowserWindow } = electron;
-
+const path = require('path');
 const restify = require('restify');
-/*
+
 const url = require('url');
 const crypto = require('crypto');
 const AuthenticationContext = require('adal-node').AuthenticationContext;
 const AdalMainConfig = {
-    instance: 'https://login.microsoftonline.com/', 
     authorityHostUrl:'https://login.windows.net',
-    tenant: 'microsoft.onmicrosoft.com',
+    instance: 'https://login.microsoftonline.com/',     
+    tenant: 'common',
     clientId: '38bd798b-779f-4866-9b25-708883817b33',
     clientSecret: '',
     extraQueryParameter: 'nux=1',
     resource: "https://graph.microsoft.com",
-    //redirectUri:  "http://localhost:3000/auth/azureoauth/callback",
-    postLogoutRedirectUri: "",
-    endpoints: {
-        graphApiUri:'https://graph.microsoft.com'
-    }
+    redirectUri:  "http://localhost:3000/auth/azureoauth/callback",
 }
-*/
+
 let mainWindow = null;
 
 // Allows for live-reload while developing the app
@@ -31,12 +27,14 @@ require('electron-debug')({
 });
 
 function createWindow() {
+    console.log("CreateWindow :: " + __dirname);
     mainWindow = new BrowserWindow({
-        width: 1200,
+        width: 1400,
         height: 900,
         autoHideMenuBar: true,
         webPreferences: {
-            //nodeIntegration: false
+            preload: path.resolve(path.join(__dirname, 'assets/preload.js')), // force the BrowserWindow to preload jQuery for AAD
+            nodeIntegration: false
         }
     });
 
@@ -70,11 +68,11 @@ app.on('activate', function () {
 
 // ADAL Settings
 let authToken = '';
-//let authorityUrl = AdalMainConfig.authorityHostUrl + '/' + AdalMainConfig.tenant;
-//let templateAuthzUrl = 'https://login.windows.net/' + AdalMainConfig.tenant + '/oauth2/authorize?response_type=code&client_id=<client_id>&redirect_uri=<redirect_uri>&state=<state>&resource=<resource>';
-//let tenantID = '';
+let authorityUrl = AdalMainConfig.authorityHostUrl + '/' + AdalMainConfig.tenant;
+let templateAuthzUrl = 'https://login.windows.net/' + AdalMainConfig.tenant + '/oauth2/authorize?response_type=code&client_id=<client_id>&redirect_uri=<redirect_uri>&state=<state>&resource=<resource>';
+let tenantID = '';
 let accessToken = '';
-//let refreshToken = '';
+let refreshToken = '';
 let user = {
     userID: '',
     lastName: '',
@@ -98,6 +96,25 @@ server.get('/info', (req, res, next) => {
     });
 });
 
+// dont know if this is needed
+server.get('/auth', (req, res, next) => {
+  console.log("Authenticate attempt!")
+  clearStorage();
+
+  crypto.randomBytes(48, function (ex, buf) {
+    var token = buf.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
+
+    this.authToken = token;
+    //res.cookie('authstate', token);
+    var authorizationUrl = createAuthorizationUrl(token);
+
+    console.log("Auth URL: " + authorizationUrl);
+    //res.redirect(authorizationUrl);
+    mainWindow.loadURL(authorizationUrl);
+  });
+});
+
+// this is the callback from AAD
 server.get('/auth/azureoauth/callback', (req, res, next) => {
   // TODO: Need to investigate query state fix - low priority
   // if (this.authToken !== req.query.state) {
@@ -106,14 +123,77 @@ server.get('/auth/azureoauth/callback', (req, res, next) => {
   // }
   
     console.log("CALLBACK: /auth/azureoauth/callback");
-    console.log("req: " + req);
-    console.log("res: " + res);
-    console.log("next: " + next);
+    console.log(req);
+
+    //console.log("req: " + req);
+    //console.log("res: " + res);
+    //console.log("next: " + next);
+    var authenticationContext = new AuthenticationContext(authorityUrl);
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, AdalMainConfig.redirectUri, AdalMainConfig.resource, AdalMainConfig.clientId, AdalMainConfig.clientSecret, function (err, response) {
+        console.log("RETURN FROM acquireTokenWithAuthorizationCode");
+        console.log(req.query.code);
+        console.log(response);
+
+        var message = '';
+        if (err) {
+            message = 'error: ' + err.message + '\n';
+            logError(message);
+
+            return;
+        }
+
+        accessToken = response.accessToken;
+        refreshToken = response.refreshToken;
+        tenantID = response.tenantId;
+        user.userID = response.userId;
+        user.lastName = response.familyName;
+        user.firstName = response.firstName;
+        user.fullName = response.firstName + ' ' + response.familyName;
+
+        // console.log("User: " + JSON.stringify(user));
+        // console.log("Access Token: " + response.accessToken);
+        // console.log("Refresh Token:" + response.refreshToken);
+
+        //saveTokens();
+        //saveUser();
+
+        mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+        // Later, if the access token is expired it can be refreshed.
+        authenticationContext.acquireTokenWithRefreshToken(response.refreshToken, AdalMainConfig.clientId, AdalMainConfig.clientSecret, AdalMainConfig.resource, function (refreshErr, refreshResponse) {
+            if (refreshErr) {
+                message += 'refreshError: ' + refreshErr.message + '\n';
+                logError(message);
+            }
+
+            accessToken = response.accessToken;
+            refreshToken = response.refreshToken;
+            tenantID = response.tenantId;
+            user.userID = response.userId;
+            user.lastName = response.familyName;
+            user.firstName = response.firstName;
+            user.fullName = response.firstName + ' ' + response.familyName;
+
+            //saveTokens();
+            //saveUser();
+        });
+    });
 });
 
 server.listen(port, () => {
   console.log('server running on port ' + port);
 });
+
+
+function createAuthorizationUrl(state) {
+    var authorizationUrl = templateAuthzUrl.replace('<client_id>', AdalMainConfig.clientId);
+    authorizationUrl = authorizationUrl.replace('<redirect_uri>', AdalMainConfig.redirectUri);
+    authorizationUrl = authorizationUrl.replace('<state>', state);
+    authorizationUrl = authorizationUrl.replace('<resource>', AdalMainConfig.resource);
+
+    return authorizationUrl;
+}
+
 
 function logError(message) {
   let code = "window.localStorage.setItem('error', '" + message + "');";

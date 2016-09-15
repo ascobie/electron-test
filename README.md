@@ -1,1 +1,4 @@
 # electron-test
+
+npm install
+
