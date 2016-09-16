@@ -60,10 +60,11 @@
             adalProvider.init({
                 instance: 'https://login.microsoftonline.com/', 
                 tenant: 'common',
-                clientId: '38bd798b-779f-4866-9b25-708883817b33',
+                clientId: '36c32244-348e-4f3d-945d-9158435fcd48',
                 extraQueryParameter: 'nux=1',
+                //redirectUri: "http://localhost:62496",
                 //redirectUri: "http://localhost:3000/auth/azureoauth/callback",
-                //cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
+                cacheLocation: 'localStorage'
             }, $httpProvider);
         }
     ]);
