@@ -15,16 +15,17 @@ var destDir         = projectDir.cwd('./build');
 var release_windows = require('./build.windows'); 
 var os = require('os'); 
 
-// create the gulp task
-gulp.task('run', ['build-less'], function () {
-    // childProcess.spawn(electron, ['./app'], { stdio: 'inherit' });
-    childProcess.spawn(electron, ['--debug=5858','./app'], { stdio: 'inherit' }); 
-});
-
+// build the less stylesheets
 gulp.task('build-less', function(){
     return gulp.src('./app/assets/css/main.less')
         .pipe(less())
         .pipe(gulp.dest('./app/assets/css'));
+});
+
+// create the main run task 
+gulp.task('run', ['build-less'], function () {
+    // childProcess.spawn(electron, ['./app'], { stdio: 'inherit' });
+    childProcess.spawn(electron, ['--debug=5858','./app'], { stdio: 'inherit' }); 
 });
 
 // clean build directory if it already exists.
@@ -33,7 +34,7 @@ gulp.task('clean', function (callback) {
 });
 
 // copy files into build directory
-gulp.task('copy', ['clean'], function () { 
+gulp.task('copy', ['clean', 'build-less'], function () { 
     return projectDir.copyAsync('app', destDir.path(), { 
         overwrite: true, matching: [ 
             './node_modules/**/*', 

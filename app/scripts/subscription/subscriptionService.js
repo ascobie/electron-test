@@ -1,12 +1,11 @@
-
 (function () {
     'use strict';
     
-    angular.module('app')
+    angular
+        .module('app')
         .service('subscriptionService', ['$q', SubscriptionService]);
     
     function SubscriptionService($q) {
-        console.log("SubscriptionService");
         return {
             list: listSubscriptions,
             getById: getSubscriptionById

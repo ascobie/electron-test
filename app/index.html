@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
-    <base href="./" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -40,7 +39,7 @@
     <link rel="stylesheet" href="./assets/css/main.css" type="text/css" />
     <!-- endbuild -->
 </head>
-<body ng-controller="homeController">
+<body ng-app="app" ng-controller="homeController">
     <div id="overlay" class="modal-backdrop" style="visibility: hidden;"></div>
     <div id="overlay-uppermost" class="modal-backdrop maximum" style="visibility: hidden;"></div>
     <div id="container">
@@ -61,22 +60,25 @@
                     <div class="menu-content">
                         <a href="#">Sign out</a>
                         <hr />
-                        <a target="_blank">Change password</a>
+                        <a href="#">Change password</a>
                         <hr />
-                        <a href="#" target="_blank">Contact Microsoft Support</a>
+                        <a href="#">Contact Microsoft Support</a>
                         <hr />
-                        <a href="#" target="_blank">Privacy &amp; cookies</a>
+                        <a href="#">Privacy &amp; cookies</a>
 
-                        <a href="#" target="_blank">Legal</a>
+                        <a href="#">Legal</a>
                     </div>
                 </div>
             </div>
         </header>
-        <section id="content">
+        <section id="content"><!-- "active-menu-option" : "menu-option" -->
             <nav>
                 <ul>
-                    <li class="active-menu-option">
-                        <a href="#/subscriptions"><img src="./assets/images/menu/menu_dashboard_white.png" width="30" height="25" /><p>Jobs</p></a>
+                    <li class="menu-option" ng-class="isActive('/pools') ? 'active-menu-option' : 'menu-option'">
+                        <a href="index.html#!/pools"><img ng-src="{{isActive('/pools') && './assets/images/menu/menu_organization_white.png' || './assets/images/menu/menu_organization_green.png'}}" src="./assets/images/menu/menu_organization_white.png" width="30" height="25" /><p>Pools</p></a>
+                    </li>
+                    <li class="menu-option" ng-class="isActive('/jobs') ? 'active-menu-option' : 'menu-option'">
+                        <a href="index.html#!/jobs"><img ng-src="{{isActive('/jobs') && './assets/images/menu/menu_deployments_white.png' || './assets/images/menu/menu_deployments_green.png'}}" src="./assets/images/menu/menu_deployments_white.png" width="30" height="25" /><p>Jobs</p></a>
                     </li>
                 </ul>
                 <div id="lowerMenuImage">
@@ -86,12 +88,8 @@
             <div id="body">
                 <div class="wrapper">
                     <section class="page-intro">
-                        <h1>My Subscriptions</h1>
-                        <p>Subscriptions that you are authorized to view</p>
-                        <p>
-                            <a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a>
-                            <a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a>
-                        </p>
+                        <h1 ng-bind="'My ' + title">My Home</h1>
+                        <p>We are using Electron: {{systemInfo.electronVersion}} on chrome: {{systemInfo.chromeVersion}} and {{systemInfo.platform}}</p>
                     </section>
                     <div id="dynamic-body">
                         <ng-view></ng-view>
@@ -108,24 +106,16 @@
                         <script src="./assets/vendor/adal-angular-experimental/lib/adal-angular.js"></script>
                         <script src="./scripts/subscription/subscriptionService.js"></script>
                         <script src="./scripts/subscription/subscriptionController.js"></script>
+                        <script src="./scripts/pool/poolService.js"></script>
+                        <script src="./scripts/pool/poolController.js"></script>
+                        <script src="./scripts/job/jobService.js"></script>
+                        <script src="./scripts/job/jobController.js"></script>
                         <script src="./scripts/home/homeController.js"></script>
                         <script src="./scripts/services/electronService.js"></script>
                         <!-- endbuild -->
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="message-modal">
-            <div id="dialouge_box" class="modal"></div>
-        </section>
-
-        <section id="slideup" class="slide-up-drawer">
-            <div id="slideupContainer" class="slide-up-drawer-container"></div>
-        </section>
-
-        <section id="innerslideout" class="inner-slide-out-drawer">
-            <div id="innerslideoutContainer" class="inner-slide-out-drawer-container"></div>
         </section>
 
         <footer>

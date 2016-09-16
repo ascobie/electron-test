@@ -24,3 +24,12 @@ https://github.com/Cecildt/angular2-O365-desktop-app/blob/master/src/home/home.t
 https://devlaundry.com/office-365-desktop-application-with-angular-2-and-electron/
 https://github.com/Cecildt/angular2-O365-desktop-app
 
+
+commands 
+########
+
+run: gulp run
+
+build: gulp build
+
+build and package installer: gulp build-electron

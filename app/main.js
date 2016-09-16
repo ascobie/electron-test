@@ -11,7 +11,7 @@ const AdalMainConfig = {
     authorityHostUrl:'https://login.windows.net',
     instance: 'https://login.microsoftonline.com/',     
     tenant: 'common',
-    clientId: '38bd798b-779f-4866-9b25-708883817b33',
+    clientId: '36c32244-348e-4f3d-945d-9158435fcd48',
     clientSecret: '',
     extraQueryParameter: 'nux=1',
     resource: "https://graph.microsoft.com",
@@ -123,20 +123,27 @@ server.get('/auth/azureoauth/callback', (req, res, next) => {
   // }
   
     console.log("CALLBACK: /auth/azureoauth/callback");
-    console.log(req);
 
-    //console.log("req: " + req);
-    //console.log("res: " + res);
-    //console.log("next: " + next);
+    console.log("req :: ", req);
+    console.log("#####################################################################");
+    console.log("res :: ", res);
+    console.log("#####################################################################");
+    console.log("next :: ", next);
+    console.log("#####################################################################");
+
+mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+    /*
+
     var authenticationContext = new AuthenticationContext(authorityUrl);
     authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, AdalMainConfig.redirectUri, AdalMainConfig.resource, AdalMainConfig.clientId, AdalMainConfig.clientSecret, function (err, response) {
         console.log("RETURN FROM acquireTokenWithAuthorizationCode");
-        console.log(req.query.code);
+        console.log(req.query);
         console.log(response);
 
         var message = '';
         if (err) {
-            message = 'error: ' + err.message + '\n';
+            message = 'got aad error: ' + err.message + '\n';
             logError(message);
 
             return;
@@ -178,6 +185,8 @@ server.get('/auth/azureoauth/callback', (req, res, next) => {
             //saveUser();
         });
     });
+
+    */
 });
 
 server.listen(port, () => {

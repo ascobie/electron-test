@@ -343,7 +343,6 @@ body {
   border: 0;
   height: 100%;
   background-color: #F2F2F2;
-  background: url(../../assets/images/Backgrounds/background.png) top center repeat-y #F2F2F2;
 }
 a {
   color: #008272;
@@ -403,7 +402,7 @@ body {
 }
 /*/* Wrapper for page content to push down footer */
 #container {
-  width: 1190px;
+  width: 100%;
   position: relative;
   /* needed for footer positioning*/
   margin: 0 auto;
@@ -992,7 +991,7 @@ button.close {
   padding-top: 30px;
 }
 .top-navigation {
-  min-width: 1190px;
+  min-width: 100%;
   position: fixed;
   z-index: 1030;
   margin-bottom: 0;
@@ -1280,7 +1279,7 @@ footer .icon_inactive {
 #footer {
   position: absolute;
   height: 75px;
-  width: 1190px;
+  width: 100%;
   bottom: 0;
   /* stick to bottom */
   background-color: #565759;

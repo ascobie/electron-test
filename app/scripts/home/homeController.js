@@ -2,13 +2,15 @@
     'use strict';
 
     angular
-        .module('app')
-        .controller('homeController', ['$scope', 'adalAuthenticationService', '$location', HomeController]);
+        .module("app")
+        .controller("homeController", ["electronService", "$scope", "adalAuthenticationService", "$location", HomeController]);
 
-    function HomeController($scope, adalService, $location) {
+    function HomeController(electronService, $scope, adalService, $location) {
         var self = this;
-
-        console.log("HomeController");
+        
+        $scope.systemInfo = {};
+        $scope.pingCounter = 0;
+        loadInfo();
 
         $scope.login = function () {
             console.log("$scope.login");
@@ -23,12 +25,17 @@
         };
 
         $scope.isActive = function (viewLocation) {
-            console.log("$scope.isActive");
             return viewLocation === $location.path();
         };
 
         $scope.ping = function () {
-            console.log("$scope.ping");
+            $scope.pingCounter++;
         };
+        
+        function loadInfo() {
+            electronService.info().then(function (response) {
+                $scope.systemInfo = response;
+            });
+        }
     }
 })();

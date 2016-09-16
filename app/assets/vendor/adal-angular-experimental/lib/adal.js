@@ -196,12 +196,16 @@ AuthenticationContext.prototype.login = function (additionalScope) {
     
     
     var urlNavigate = this._getNavigateUrl('id_token', scope) + '&nonce=' + encodeURIComponent(this._idTokenNonce);
+    this._logstatus('[as] urlNavigate: ' + urlNavigate);
+
     this.frameCallInProgress = false;
     this._loginInProgress = true;
     if (this.config.displayCall) {
+        this._logstatus('[as] this.config.displayCall');
         // User defined way of handling the navigation
         this.config.displayCall(urlNavigate);
     } else {
+        this._logstatus('[as] else');
         this.promptUser(urlNavigate);
     }
     // callback from redirected page will receive fragment. It needs to call oauth2Callback

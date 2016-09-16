@@ -1,11 +1,11 @@
-
 (function () {
     'use strict';
     
-    angular.module('app').service('electronService', ['$q', '$http', ElectronService]);
+    angular
+        .module('app')
+        .service('electronService', ['$q', '$http', ElectronService]);
     
     function ElectronService($q, $http) {
-        console.log("ElectronService");
         return {
             info: getElectronInfo
         };
