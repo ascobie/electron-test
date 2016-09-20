@@ -1,0 +1,230 @@
+@import "variables";
+@import "mixins";
+
+//---------------------------------------------
+// Grid Variables
+//---------------------------------------------
+
+@backgridBackgroundColour           : transparent;
+@backgridHeaderBackgroundColour     : @altoGray;
+@backgridHeaderFontColour           : @abbyGrey;
+@backgridHeaderFontColourHover      : @dustyGray;
+@backgridHeaderFontWeight           : semibold;
+@backgridSelectedHeaderFontWeight   : bold;
+@backgridColumnRightBorderColour    : @concreteGray; 
+@backgridAscendingHeaderBackground  : @deepSeaGreen; 
+@backgridAscendingHeaderTextColour  : @white; 
+@backgridDescendingHeaderBackground : @deepSeaGreen; 
+@backgridDescendingHeaderTextColour : @white; 
+@backgridColumnSortedBackground     : #f3fdf4;
+@backgridRowHoverBackground         : #edf1f2;
+@backgridRowHoverHighlightBackground: @geyser;
+@backgridRowHighlightDarkBackground : @whoopieGreen;
+@backgridRowSelectedBackground      : @skepticGreen;
+@backgridRowSelectedTextColour      : @abbyGrey;
+@backgridRowHighlightTextColour     : @white;
+@backgridRowFontSize                : @baseFontSize;
+@backgridHeadingFontSize            : @baseFontSize;
+@highlightColumnColor               : #edf1f2;
+
+//---------------------------------------------
+// Button Group Variables
+//---------------------------------------------
+@buttonGroupFirstChildBorderRadius  : @baseBorderRadius;
+@buttonGroupLastChildBorderRadius   : @baseBorderRadius;
+@buttonGroupHighlight               : @almostMingGreen;
+@buttonGroupPopoverFontSize         : @baseFontSize;
+
+//---------------------------------------------
+// Button Variables
+//---------------------------------------------
+@btnBackground                      : @deepSeaGreen;
+@btnDisabledBackground              : @doveGray;
+@btnBackgroundHighlight             : @almostMingGreen;
+@btnTextColour                      : @skeptic;
+@btnBorder                          : @pineGreen;
+@btnButtonFontSize                  : 9pt;
+@btnLineHieght                      : 20px;
+@btnFontWeight                      : bold;
+
+@btnPrimaryBackground               : #0071BC;
+@btnPrimaryBackgroundHighlight      : #006AB9;
+
+@btnModalGreenBackground            : @deepSeaGreen;
+@btnModalGreenBorder                : @pineGreen;
+@btnModalGreenTextColour            : @skeptic;
+
+@btnModalRedBackground              : @buttonBrown;
+@btnModalRedBorder                  : @crail;
+@btnModalRedTextColour              : @vanillaIce;
+
+@btnInfoBackground                  : #5bc0de;
+@btnInfoBackgroundHighlight         : #2f96b4;
+
+@btnSuccessBackground               : #62c462;
+@btnSuccessBackgroundHighlight      : #51a351;
+
+@btnWarningBackground               : lighten(#f89406, 15%);
+@btnWarningBackgroundHighlight      : #f89406;
+
+@btnDangerBackground                : #bd362f;
+@btnDangerBackgroundHighlight       : #bd362f;
+
+@btnInverseBackground               : @dustyGray;
+@btnInverseBackgroundHighlight      : @dustyGray;
+@btnInverseTextColour               : @altoGray;
+@btnInverseBorder                   : #7B7B7B;
+
+//---------------------------------------------
+// Dropdown Variables
+//---------------------------------------------
+@dropdownBackground                 : @white;
+@dropdownBorder                     : rgba(0,0,0,.2);
+@dropdownDividerTop                 : #e5e5e5;
+@dropdownDividerBottom              : @white;
+
+@dropdownLinkColor                  : @genericGray;
+@dropdownLinkColorHover             : @white;
+@dropdownLinkColorActive            : @white;
+
+@dropdownLinkBackgroundActive       : @linkColor;
+@dropdownLinkBackgroundHover        : @dropdownLinkBackgroundActive;
+
+//---------------------------------------------
+// Modal Variables
+//---------------------------------------------
+@modalHeaderBackground              : @abbyGrey;
+@modalLabelsColour                  : @deepSeaGreen;
+@modalTextboxWithGrayBackground     : @concreteGray;
+
+//---------------------------------------------
+// Side Navigation Variables
+//---------------------------------------------
+
+@sideNavBackgroundColor             : #edf1f2;
+@sideNavLinkColour                  : @deepSeaGreen; 
+@sideNavLinkColourActive            : @white; 
+@sideNavHoverBackground             : @tiaraGray;
+@sideNavActiveBackground            : @deepSeaGreen; 
+@sideBarNavFontFamily               : @segoeUiFontFamily;
+
+//---------------------------------------------
+// Top Navigation Variables
+//---------------------------------------------
+
+@topNavBackgroundColor              : @abbyGrey;
+@topNavUserBackgroundColor          : @mineralGreen;
+@topNavUserBackgroundHover          : @doveGray;
+@topNavFontFamily                   : @segoeUiFontFamily;
+
+//---------------------------------------------
+// Footer Variables
+//--------------------------------------------
+@footerBackgroundColor              : @abbyGrey; 
+
+//---------------------------------------------
+// Slideup Variables
+//---------------------------------------------
+@slideupBackgroundColor             : @deepSeaGreen;
+
+//---------------------------------------------
+// Log Slideup Variables
+//---------------------------------------------
+@logItemTimeColor                   : @deepSeaGreen;
+
+//---------------------------------------------
+// Pagination
+//---------------------------------------------
+@paginationWidth                    : 16px;
+@paginationHeight                   : 21px;
+@paginatioFontSize                  : 10pt;
+@paginationActiveColour             : @deepSeaGreen;  
+@paginationColour                   : @porcelain;  
+
+//---------------------------------------------
+// Progress Bars
+//---------------------------------------------
+@progressBarColour                  : @deepSeaGreen;
+
+//---------------------------------------------
+// Forms
+//---------------------------------------------
+@inputBackground    :   #F8F8F8;
+@inputBorder        :   @silverGray;
+@inputBorderRadius  :   @borderRadiusLarge;
+@inputDisabledBackground: @mercuryGray;
+@formActionsBackground: #f5f5f5;
+@inputHeight        :   @baseLineHeight + 10px; // base line-height + 8px vertical padding + 2px top/bottom border
+@placeholderText    :   @doveGray;
+@graySpanColour     :   @altoGray;
+
+//---------------------------------------------
+// Form States and Alerts
+//---------------------------------------------
+
+@state-warning-text:             @white;
+@state-warning-bg:               #f89406;
+@state-warning-border:           darken(@state-warning-bg, 3%);
+
+@state-danger-text:              #bd362f;
+@state-danger-bg:                @white;
+@state-danger-border:            #bd362f;
+
+@state-success-text:             @white;
+@state-success-bg:               #51a351;
+@state-success-border:           darken(@state-success-bg, 5%);
+
+@state-info-text:                @white;
+@state-info-bg:                  #2f96b4;
+@state-info-border:              darken(@state-info-bg, 7%);
+
+//---------------------------------------------
+// Alerts
+//---------------------------------------------
+@alert-padding:               10px;
+@alert-border-radius:         @baseBorderRadius;
+@alert-link-font-weight:      bold;
+
+@alert-success-bg:            @state-success-bg;
+@alert-success-text:          @state-success-text;
+@alert-success-border:        @state-success-border;
+
+@alert-info-bg:               @state-info-bg;
+@alert-info-text:             @state-info-text;
+@alert-info-border:           @state-info-border;
+
+@alert-warning-bg:            @state-warning-bg;
+@alert-warning-text:          @state-warning-text;
+@alert-warning-border:        @state-warning-border;
+
+@alert-danger-bg:             @state-danger-bg;
+@alert-danger-text:           @state-danger-text;
+@alert-danger-border:         @state-danger-border;
+
+//---------------------------------------------
+// Close
+//---------------------------------------------
+@close-color:                 #000;
+@close-font-weight:           bold;
+@close-text-shadow:           0 1px 0 #fff;
+
+//---------------------------------------------
+// Boss Variables
+//---------------------------------------------
+@graphHeadingBackground:     @pantinaGreen;
+@graphBackground:            @whiteSmoke;
+
+//---------------------------------------------
+// Heatmap Variables
+//---------------------------------------------
+@heatmapSelectedDisplayHeaderBackground: @deepSeaGreen; 
+@heatmapSelectedDisplayHeaderTextColour: @white;
+
+@heatmapDisplayHeaderBackground: @altoGray; 
+@heatmapDisplayHeaderTextColour: @abbyGrey;
+
+
+//---------------------------------------------
+// Random Variables
+//---------------------------------------------
+@copyConfirmationBoxBackgroundColor: @scandal;

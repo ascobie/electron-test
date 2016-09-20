@@ -847,6 +847,9 @@ AuthenticationContext.prototype._convertUrlSafeToRegularBase64EncodedString = fu
 
 AuthenticationContext.prototype._serialize = function (responseType, obj, resource) {
     var str = [];
+    console.log("@@@@ responseType: ", responseType);
+    console.log("@@@@ obj: ", obj);
+    
     if (obj !== null) {
         str.push('?response_type=' + responseType);
         str.push('client_id=' + encodeURIComponent(obj.clientId));

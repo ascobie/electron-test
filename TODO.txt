@@ -24,6 +24,8 @@ https://github.com/Cecildt/angular2-O365-desktop-app/blob/master/src/home/home.t
 https://devlaundry.com/office-365-desktop-application-with-angular-2-and-electron/
 https://github.com/Cecildt/angular2-O365-desktop-app
 
+https://github.com/azure-samples?query=active-directory
+
 
 commands 
 ########

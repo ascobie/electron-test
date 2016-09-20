@@ -43,7 +43,6 @@
                     controller: 'jobController',
                     controllerAs: '_ctrl',
                     title: 'Jobs',
-                    //requireADLogin: true
 
                 })
                 .when('/pools', {
@@ -58,12 +57,17 @@
 
             // AAD config. Cant get it to work with Electron as the callback is being dumb
             adalProvider.init({
-                instance: 'https://login.microsoftonline.com/', 
+                //instance: 'https://login.microsoftonline.com/', 
+                authorityHostUrl: 'https://login.windows.net',
                 tenant: 'common',
-                clientId: '36c32244-348e-4f3d-945d-9158435fcd48',
+                clientId: 'f9dfefa2-423e-4391-9e87-8bcb4d161962',
                 extraQueryParameter: 'nux=1',
-                //redirectUri: "http://localhost:62496",
-                //redirectUri: "http://localhost:3000/auth/azureoauth/callback",
+                resource: "https://graph.microsoft.com",
+                redirectUri: "http://localhost:3000/auth/azureoauth/callback",
+                endpoints: {
+	                graphApiUri: 'https://graph.microsoft.com'
+	            },
+                //endpoints: ["http://localhost:3000", "36c32244-348e-4f3d-945d-9158435fcd48"],
                 cacheLocation: 'localStorage'
             }, $httpProvider);
         }

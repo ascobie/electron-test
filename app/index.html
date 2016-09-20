@@ -41,48 +41,39 @@
 </head>
 <body ng-app="app" ng-controller="homeController">
     <div id="overlay" class="modal-backdrop" style="visibility: hidden;"></div>
-    <div id="overlay-uppermost" class="modal-backdrop maximum" style="visibility: hidden;"></div>
     <div id="container">
         <header class="top-navigation">
-            <div class="logo-banner-bar" style="background-color:#565759">
-                <a class="logo" href="#" title="Azure Batch Apps - Home">
-                    <img src="./assets/images/header/batch-logo.png" width="175" height="17" alt="Azure Batch Apps logo" />
+            <div class="logo-banner-bar">
+                <a class="logo" href="#" title="Batch Explorer - Home">
+                    <img src="./assets/images/header/batch-logo.png" height="19" alt="Batch Explorer logo" />
                 </a>
             </div>
             <div class="user_menu">
                 <div class="usermenu">
-                    <div class="usermenu-toggle" data-toggle="usermenu" data-target=".user_menu">
-                        <p class="userLabel">ascobie@microsoft.com</p>
-                        <div class="user_arrow aad"></div>
-                    </div>
-                </div>
-                <div class="usermenu-menu">
-                    <div class="menu-content">
-                        <a href="#">Sign out</a>
-                        <hr />
-                        <a href="#">Change password</a>
-                        <hr />
-                        <a href="#">Contact Microsoft Support</a>
-                        <hr />
-                        <a href="#">Privacy &amp; cookies</a>
-
-                        <a href="#">Legal</a>
-                    </div>
+                    <login></login>
+                    <div class="user_arrow aad"></div>
                 </div>
             </div>
         </header>
-        <section id="content"><!-- "active-menu-option" : "menu-option" -->
+        
+        <section id="sub-navigation" style="height: 50px;">
+            <ul>
+                <li><a href="#">Accounts</a></li>
+                <li><span>|</span></li>
+                <li><a href="index.html#!/pools">Pools</a></li>
+                <li><span>|</span></li>
+                <li><a href="index.html#!/jobs">Jobs</a></li>
+                <li><span>|</span></li>
+                <li><a href="#">Job Schedules</a></li>
+            </ul>
+        </section>
+
+        <section id="content">
             <nav>
-                <ul>
-                    <li class="menu-option" ng-class="isActive('/pools') ? 'active-menu-option' : 'menu-option'">
-                        <a href="index.html#!/pools"><img ng-src="{{isActive('/pools') && './assets/images/menu/menu_organization_white.png' || './assets/images/menu/menu_organization_green.png'}}" src="./assets/images/menu/menu_organization_white.png" width="30" height="25" /><p>Pools</p></a>
-                    </li>
-                    <li class="menu-option" ng-class="isActive('/jobs') ? 'active-menu-option' : 'menu-option'">
-                        <a href="index.html#!/jobs"><img ng-src="{{isActive('/jobs') && './assets/images/menu/menu_deployments_white.png' || './assets/images/menu/menu_deployments_green.png'}}" src="./assets/images/menu/menu_deployments_white.png" width="30" height="25" /><p>Jobs</p></a>
-                    </li>
-                </ul>
-                <div id="lowerMenuImage">
-                    <img src="./assets/images/menu/menu_foot_image.png" width="180" height="112" alt="menu footer" />
+                <div class="wrapper">
+                    <section class="page-intro">
+                        <h1>My Accounts</h1>
+                    </section>
                 </div>
             </nav>
             <div id="body">
@@ -111,6 +102,8 @@
                         <script src="./scripts/job/jobService.js"></script>
                         <script src="./scripts/job/jobController.js"></script>
                         <script src="./scripts/home/homeController.js"></script>
+                        <script src="./scripts/home/components/login.js"></script>
+                        <script src="./scripts/home/components/footerInfo.js"></script>
                         <script src="./scripts/services/electronService.js"></script>
                         <!-- endbuild -->
                     </div>
@@ -120,7 +113,7 @@
 
         <footer>
             <div id="footer" class="center_this">
-
+                <footer-info></footer-info>
             </div>
         </footer>
     </div>

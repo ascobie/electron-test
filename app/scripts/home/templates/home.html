@@ -1,8 +1,2 @@
 
-<p>Click on the Jobs link to try and authenticate, or try the links below.</p>
 <a href="javascript:void(0);" ng-click="ping()">Ping Test</a> - {{pingCounter}}
-
-<p>&nbsp;</p>
-<span data-ng-hide="!userInfo.isAuthenticated">Welcome {{userInfo.userName}} </span>
-<button data-ng-hide="!userInfo.isAuthenticated" data-ng-click="logout()">Logout</button>
-<button data-ng-hide="userInfo.isAuthenticated" data-ng-click="login()">Login</button>

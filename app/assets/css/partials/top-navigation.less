@@ -1,0 +1,116 @@
+
+@import "../theme/component-variables";
+@import "../theme/mixins";
+
+.top-navigation {
+    min-width: @bodyContentWidth;
+    position: fixed;
+    z-index: 1030;  
+    margin-bottom: 0;
+    background-color:@topNavBackgroundColor;
+
+    p a {
+        font-size: 10pt;
+        color: @white;
+        font-family: @topNavFontFamily;
+        .font-weight(normal);
+    }
+
+    .logo-banner-bar {
+        float:left;
+        height: 31px;
+
+        a {
+          position: relative;
+          display: inline-block;
+        }
+
+        a:after {
+            content: ""; 
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            bottom: 0; 
+            left: 0;
+        }
+
+        .logo {
+            margin-top: 7px;
+            margin-left: 9px;
+            float: left;
+        }
+    }
+
+    .user_menu {
+        background-color: @topNavBackgroundColor;
+        height: 31px;
+        clear: none;
+        float: right;
+        cursor: pointer;
+
+        &.open {
+            background-color: @topNavUserBackgroundHover !important;
+        }
+                
+        &:hover {
+            background-color: @topNavUserBackgroundHover;
+            height: 31px;
+        }
+
+        p {
+            float: left;
+            margin-right: 5px;
+            margin-top: 6px;  
+            padding: 0 0 0 5px;  
+        }
+   
+        & a p {
+            margin-right: 13px;
+            float:left;
+        }
+
+        & a p image {
+            margin-top: 5px;
+            margin-right: 13px;
+        }
+      
+        & a:hover {border-bottom: none;  }
+
+        /*
+            drop down menu, specific to the user_menu only.
+            if moved out of here it breaks all other drop downs 
+            in the site, including anything that uses the bootstrap 
+            calendar 
+        */
+        .usermenu {
+            .person_icon {
+                float: left;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 9px;
+            }
+
+            .userLabel {
+                float: left;
+                color: white;
+                padding-top: 1px;    
+
+                &:hover {
+                    color: #85c3bb;
+                }
+            }   
+
+            .user_arrow {
+                float: right;
+                height: 30px;
+                width: 30px;
+                background-image: url(../images/header/avatar-default-small.png);
+                background-repeat: no-repeat;
+            }
+
+            .user_arrow.aad {
+                background-image: url(../images/header/avatar-org-small.png) !important;
+            }
+        }
+    }
+}
