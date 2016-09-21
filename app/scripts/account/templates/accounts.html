@@ -1,0 +1,45 @@
+
+<nav>
+    <h1>Accounts</h1>
+    <md-list class="my-grid" style="width:100%;border: 1px solid #CCC;padding:0px">
+        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="account in _ctrl.accounts">
+            <p ng-click="_ctrl.selectAccount(account, $index)"> {{account.name}} </p>
+        </md-list-item>
+    </md-list>
+    <p><a href="javascript:void(0);" ng-click="_ctrl.state('add')">Add Account</a></p>
+</nav>
+<div id="body">
+    <h1>Account Details</h1>
+
+    <div ng-show="_ctrl.selected" class="form-inline-block">
+        <p>This is the currently selected account</p>
+        <p>selected: {{_ctrl.selected.name}} </p>
+    </div>
+
+    <div ng-show="_ctrl.adding" class="form-inline-block">
+        <p>Add an account and key for retrieving Batch account data</p>
+        <form name="addAccountForm">
+            <input type="text" ng-model="account.alias" class="form-control" placeholder="account alias ..." required="required" />
+            <input type="text" ng-model="account.name" class="form-control" placeholder="account name ..." required="required" />
+            <input type="text" ng-model="account.url" class="form-control-wide" placeholder="batch service url ..." required="required" />
+            <input type="text" ng-model="account.key" class="form-control-wide" placeholder="account key ..." required="required" />
+            <input type="checkbox" ng-model="account.isDefault" value="false" />&nbsp;<span>default account</span>
+        </form>
+
+        <p>&nbsp;</p>
+        <div class="button-bar">
+            <button type="submit" ng-click="add(account)" class="btn">
+                <span>Save</span>
+            </button>
+            <button type="reset" ng-click="reset()" class="btn btn-inverse">
+                <span>Reset</span>
+            </button>
+
+            <div data-ng-show="_ctrl.validationErrors.length > 0" data-ng-cloak class="input-validation-error">
+                <ul>
+                    <li ng-repeat="error in _ctrl.validationErrors">{{error}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

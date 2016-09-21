@@ -47,6 +47,7 @@ footer {
     nav {
         width: 250px;
         height: 100%;
+        padding: 20px;
         background-color: #edf1f2;
         border-right: 1px solid @topNavUserBackgroundHover;
         display: block;
@@ -56,49 +57,40 @@ footer {
     #body {
         width: 500px;
         height: 100%;
+        padding: 20px;
         display: block;
         overflow: hidden;
         float: left;
-    }
-}
 
-.wrapper {
-    padding: 20px;
-}
+        section#sub-nav {
+            color: @doveGray;
+            margin-top: -28px; 
+            .font-weight(normal);
+            color: #858585;
 
-.page-intro {
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 10px;
+            ul {
+                list-style: none;
+                display: inline-block;
+                margin: 0 0 0 -3px;
+                padding: 0;
+                
+                li {
+                    float:left;
+                    margin-right: 5px;
 
-    section#sub-nav {
-        color: @doveGray;
-        margin-top: -28px; 
-        .font-weight(normal);
-        color: #858585;
+                    a {
+                        color: @doveGray !important;
+                        padding: 2px 4px 2px 4px;
+                    }
 
-        ul {
-            list-style: none;
-            display: inline-block;
-            margin: 0 0 0 -3px;
-            padding: 0;
-            
-            li {
-                float:left;
-                margin-right: 5px;
+                    a.selected {
+                        color: @headingsColor !important;
+                        .font-weight(semibold);
+                    }
 
-                a {
-                    color: @doveGray !important;
-                    padding: 2px 4px 2px 4px;
-                }
-
-                a.selected {
-                    color: @headingsColor !important;
-                    .font-weight(semibold);
-                }
-
-                a:hover {
-                    color: @headingsColor !important;
+                    a:hover {
+                        color: @headingsColor !important;
+                    }
                 }
             }
         }
@@ -124,6 +116,9 @@ footer {
     }
 }
 
+.wrapper {
+    padding: 20px;
+}
 
 
 /*--------------------------------------------------------------------------------------

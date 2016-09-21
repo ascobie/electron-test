@@ -35,21 +35,30 @@
                 })
                 .when('/home', {
                     templateUrl: _templateBase + '/home/templates/home.html' ,
-                    controller: 'homeController',
-                    title: 'Home'
+                    controller: 'homeController'
+                })
+                .when('/accounts', {
+                    templateUrl: _templateBase + '/account/templates/accounts.html' ,
+                    controller: 'accountController',
+                    controllerAs: '_ctrl'
+
                 })
                 .when('/jobs', {
-                    templateUrl: _templateBase + '/job/templates/job-list.html' ,
+                    templateUrl: _templateBase + '/job/templates/jobs.html' ,
                     controller: 'jobController',
-                    controllerAs: '_ctrl',
-                    title: 'Jobs',
+                    controllerAs: '_ctrl'
+
+                })
+                .when('/jobschedules', {
+                    templateUrl: _templateBase + '/jobSchedule/templates/jobSchedules.html' ,
+                    controller: 'jobController',
+                    controllerAs: '_ctrl'
 
                 })
                 .when('/pools', {
-                    templateUrl: _templateBase + '/pool/templates/pool-list.html' ,
+                    templateUrl: _templateBase + '/pool/templates/pools.html' ,
                     controller: 'poolController',
-                    controllerAs: '_ctrl',
-                    title: 'Pools'
+                    controllerAs: '_ctrl'
                 })
             ;
 

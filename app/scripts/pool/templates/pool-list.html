@@ -1,7 +1,0 @@
-
-<md-list class="my-grid" style="width:80%;border: 1px solid #CCC;padding:0px">
-    <md-list-item md-ink-ripple="#03A9F4" ng-repeat="pool in _ctrl.pools">
-        <p> {{pool.name}} </p>
-        <md-checkbox class="md-secondary" ng-model="pool.wanted" ng-click="_ctrl.selectPool(pool, $index)" aria-label="{{pool.name}}"></md-checkbox>
-    </md-list-item>
-</md-list>

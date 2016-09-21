@@ -1,0 +1,13 @@
+
+<nav>
+    <h1>Jobs</h1>
+    <md-list class="my-grid" style="width:100%;border: 1px solid #CCC;padding:0px">
+        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="job in _ctrl.jobs">
+            <p> {{job.name}} </p>
+            <md-checkbox class="md-secondary" ng-model="job.wanted" ng-click="_ctrl.selectJob(job, $index)" aria-label="{{job.name}}"></md-checkbox>
+        </md-list-item>
+    </md-list>
+</nav>
+<div id="body">
+    <h1>Job Details</h1>
+</div>

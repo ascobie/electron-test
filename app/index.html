@@ -58,57 +58,18 @@
         
         <section id="sub-navigation" style="height: 50px;">
             <ul>
-                <li><a href="#">Accounts</a></li>
+                <li><a href="index.html#!/accounts">Accounts</a></li>
                 <li><span>|</span></li>
                 <li><a href="index.html#!/pools">Pools</a></li>
                 <li><span>|</span></li>
                 <li><a href="index.html#!/jobs">Jobs</a></li>
                 <li><span>|</span></li>
-                <li><a href="#">Job Schedules</a></li>
+                <li><a href="index.html#!/jobschedules">Job Schedules</a></li>
             </ul>
         </section>
 
         <section id="content">
-            <nav>
-                <div class="wrapper">
-                    <section class="page-intro">
-                        <h1>My Accounts</h1>
-                    </section>
-                </div>
-            </nav>
-            <div id="body">
-                <div class="wrapper">
-                    <section class="page-intro">
-                        <h1 ng-bind="'My ' + title">My Home</h1>
-                        <p>We are using Electron: {{systemInfo.electronVersion}} on chrome: {{systemInfo.chromeVersion}} and {{systemInfo.platform}}</p>
-                    </section>
-                    <div id="dynamic-body">
-                        <ng-view></ng-view>
-
-                        <script src="./assets/vendor/angular/angular.js"></script>
-                        <script src="./assets/vendor/angular-route/angular-route.js"></script>
-                        <script src="./assets/vendor/angular-animate/angular-animate.js"></script>
-                        <script src="./assets/vendor/angular-aria/angular-aria.js"></script>
-                        <script src="./assets/vendor/angular-material/angular-material.js"></script>
-
-                        <!-- build:app scripts/app.js -->
-                        <script src="./scripts/app.js"></script>
-                        <script src="./assets/vendor/adal-angular-experimental/lib/adal.js"></script>
-                        <script src="./assets/vendor/adal-angular-experimental/lib/adal-angular.js"></script>
-                        <script src="./scripts/subscription/subscriptionService.js"></script>
-                        <script src="./scripts/subscription/subscriptionController.js"></script>
-                        <script src="./scripts/pool/poolService.js"></script>
-                        <script src="./scripts/pool/poolController.js"></script>
-                        <script src="./scripts/job/jobService.js"></script>
-                        <script src="./scripts/job/jobController.js"></script>
-                        <script src="./scripts/home/homeController.js"></script>
-                        <script src="./scripts/home/components/login.js"></script>
-                        <script src="./scripts/home/components/footerInfo.js"></script>
-                        <script src="./scripts/services/electronService.js"></script>
-                        <!-- endbuild -->
-                    </div>
-                </div>
-            </div>
+            <ng-view></ng-view>
         </section>
 
         <footer>
@@ -121,5 +82,29 @@
     <section id="slideout" class="slide-out-drawer">
         <div id="slideoutContainer" class="slide-out-drawer-container"> </div>
     </section>
+
+    <script src="./assets/vendor/angular/angular.js"></script>
+    <script src="./assets/vendor/angular-route/angular-route.js"></script>
+    <script src="./assets/vendor/angular-animate/angular-animate.js"></script>
+    <script src="./assets/vendor/angular-aria/angular-aria.js"></script>
+    <script src="./assets/vendor/angular-material/angular-material.js"></script>
+
+    <!-- build:app scripts/app.js -->
+    <script src="./scripts/app.js"></script>
+    <script src="./assets/vendor/adal-angular-experimental/lib/adal.js"></script>
+    <script src="./assets/vendor/adal-angular-experimental/lib/adal-angular.js"></script>
+    <script src="./scripts/pool/poolService.js"></script>
+    <script src="./scripts/pool/poolController.js"></script>
+    <script src="./scripts/job/jobService.js"></script>
+    <script src="./scripts/job/jobController.js"></script>
+    <script src="./scripts/account/accountService.js"></script>
+    <script src="./scripts/account/accountController.js"></script>
+    <script src="./scripts/jobSchedule/jobScheduleService.js"></script>
+    <script src="./scripts/jobSchedule/jobScheduleController.js"></script>
+    <script src="./scripts/home/homeController.js"></script>
+    <script src="./scripts/home/components/login.js"></script>
+    <script src="./scripts/home/components/footerInfo.js"></script>
+    <script src="./scripts/services/electronService.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

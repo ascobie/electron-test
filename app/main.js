@@ -3,20 +3,8 @@ const electron = require('electron');
 const { app, BrowserWindow } = electron;
 const path = require('path');
 const restify = require('restify');
-
-const url = require('url');
-const crypto = require('crypto');
-const AuthenticationContext = require('adal-node').AuthenticationContext;
-const AdalMainConfig = {
-    authorityHostUrl:'https://login.windows.net',
-    // instance: 'https://login.microsoftonline.com/',     
-    tenant: 'common',
-    clientId: 'f9dfefa2-423e-4391-9e87-8bcb4d161962',
-    clientSecret: '',
-    extraQueryParameter: 'nux=1',
-    resource: "https://graph.microsoft.com",
-    redirectUri:  "http://localhost:3000/auth/azureoauth/callback",
-}
+const storage = require('electron-json-storage');
+const Q = require('Q');
 
 let mainWindow = null;
 
@@ -28,6 +16,8 @@ require('electron-debug')({
 
 function createWindow() {
     console.log("CreateWindow :: " + __dirname);
+    console.log("UserData location: ", app.getPath('userData'))
+
     mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
@@ -58,27 +48,12 @@ app.on('window-all-closed', function () {
 });
 
 app.on('activate', function () {
-    console.log("ACTIVATE");
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow();
     }
 });
-
-// ADAL Settings
-let authToken = '';
-let authorityUrl = AdalMainConfig.authorityHostUrl + '/' + AdalMainConfig.tenant;
-let templateAuthzUrl = 'https://login.windows.net/' + AdalMainConfig.tenant + '/oauth2/authorize?response_type=code&client_id=<client_id>&redirect_uri=<redirect_uri>&state=<state>&resource=<resource>';
-let tenantID = '';
-let accessToken = '';
-let refreshToken = '';
-let user = {
-    userID: '',
-    lastName: '',
-    firstName: '',
-    fullName: ''
-}
 
 // Start Restify API Server
 let port = process.env.PORT || 3000;
@@ -96,87 +71,30 @@ server.get('/info', (req, res, next) => {
     });
 });
 
-// dont know if this is needed
-server.get('/auth', (req, res, next) => {
-  console.log("Authenticate attempt!")
-  clearStorage();
-
-  crypto.randomBytes(48, function (ex, buf) {
-    var token = buf.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
-
-    this.authToken = token;
-    //res.cookie('authstate', token);
-    var authorizationUrl = createAuthorizationUrl(token);
-
-    console.log("Auth URL: " + authorizationUrl);
-    //res.redirect(authorizationUrl);
-    mainWindow.loadURL(authorizationUrl);
-  });
-});
-
-// this is the callback from AAD
-server.get('/auth/azureoauth/callback', (req, res, next) => {
-  // TODO: Need to investigate query state fix - low priority
-  // if (this.authToken !== req.query.state) {
-  //   console.log('error: state does not match');
-  //   res.send('error: state does not match');
-  // }
-  
-    console.log("CALLBACK: /auth/azureoauth/callback");
-    console.log("req :: ", req);
-    console.log("#####################################################################");
-
-    // mainWindow.loadURL('file://' + __dirname + '/index.html');
-
-    var authenticationContext = new AuthenticationContext(authorityUrl);
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, AdalMainConfig.redirectUri, AdalMainConfig.resource, AdalMainConfig.clientId, AdalMainConfig.clientSecret, function (err, response) {
-        console.log("RETURN FROM acquireTokenWithAuthorizationCode");
-        console.log(req.query);
-        console.log("RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, RESPONSE, ");
-        console.log(response);
-
-        var message = '';
-        if (err) {
-            message = 'got aad error: ' + err.message + '\n';
-            logError(message);
-
-            return;
+server.get('/accounts', (req, res, next) => {
+    storage.get("accounts", function(error, data) {
+        if (error) throw error;
+        if (Array.isArray(data)) {
+            console.log("GET:/accounts:", data.length)
+            res.send(data);
         }
 
-        accessToken = response.accessToken;
-        refreshToken = response.refreshToken;
-        tenantID = response.tenantId;
-        user.userID = response.userId;
-        user.lastName = response.familyName;
-        user.firstName = response.firstName;
-        user.fullName = response.firstName + ' ' + response.familyName;
+        res.send([]);
+    });
+});
 
-        // console.log("User: " + JSON.stringify(user));
-        // console.log("Access Token: " + response.accessToken);
-        // console.log("Refresh Token:" + response.refreshToken);
+server.post('/accounts', (req, res, next) => {
+    let accountArray = [];
+    storage.get("accounts", function(error, data) {
+        if (error) throw error;
+        if (Array.isArray(data)) {
+            accountArray = accountArray.concat(data);
+        }
 
-        //saveTokens();
-        //saveUser();
-
-        mainWindow.loadURL('file://' + __dirname + '/index.html');
-
-        // Later, if the access token is expired it can be refreshed.
-        authenticationContext.acquireTokenWithRefreshToken(response.refreshToken, AdalMainConfig.clientId, AdalMainConfig.clientSecret, AdalMainConfig.resource, function (refreshErr, refreshResponse) {
-            if (refreshErr) {
-                message += 'refreshError: ' + refreshErr.message + '\n';
-                logError(message);
-            }
-
-            accessToken = response.accessToken;
-            refreshToken = response.refreshToken;
-            tenantID = response.tenantId;
-            user.userID = response.userId;
-            user.lastName = response.familyName;
-            user.firstName = response.firstName;
-            user.fullName = response.firstName + ' ' + response.familyName;
-
-            //saveTokens();
-            //saveUser();
+        // validate data again at the server
+        accountArray.push(req.params);
+        saveToStorage('accounts', accountArray.filter(item => item !== null)).then(function (response) {
+            res.send(201);
         });
     });
 });
@@ -185,16 +103,32 @@ server.listen(port, () => {
   console.log('server running on port ' + port);
 });
 
+function getFromStorage(fileName) {
+    var deferred = Q.defer();
+    storage.get(fileName, function(error, data) {
+        if (error) {
+            deferred.reject(error); 
+        }
 
-function createAuthorizationUrl(state) {
-    var authorizationUrl = templateAuthzUrl.replace('<client_id>', AdalMainConfig.clientId);
-    authorizationUrl = authorizationUrl.replace('<redirect_uri>', AdalMainConfig.redirectUri);
-    authorizationUrl = authorizationUrl.replace('<state>', state);
-    authorizationUrl = authorizationUrl.replace('<resource>', AdalMainConfig.resource);
+        console.log("getFromStorage", data);
+        deferred.resolve(data)
+    });
 
-    return authorizationUrl;
+    return deferred.promise;
 }
 
+function saveToStorage(fileName, jsonData) {
+    var deferred = Q.defer();
+    storage.set(fileName, jsonData, function(error) {
+        if (error) {
+            deferred.reject(error); 
+        }
+
+        deferred.resolve(); 
+    });
+
+    return deferred.promise;
+}
 
 function logError(message) {
   let code = "window.localStorage.setItem('error', '" + message + "');";
