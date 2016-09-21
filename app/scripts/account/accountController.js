@@ -16,6 +16,8 @@
         self.selectAccount = selectAccount;
         self.state = state;
         self.adding = false;
+        self.editing = false;
+        self.deleting = false;
         self.selected = false;
 
         $scope.master = {};
@@ -46,6 +48,8 @@
         function state(myState) {
             self.adding = myState == "add";
             self.selected = myState == "selected";
+            self.editing = myState == "edit";
+            self.deleting = myState == "delete";
         }
 
         function validateAccount(account) {
@@ -84,8 +88,8 @@
         };
 
         $scope.reset = function() {
-            $scope.account = angular.copy($scope.master);
             self.validationErrors = [];
+            $scope.account = angular.copy($scope.master);
         };
 
         $scope.reset();

@@ -43,24 +43,24 @@ footer {
     min-height: 425px;
     overflow: hidden;
     width: 100%;
+    min-width: 800px;
 
     nav {
-        width: 250px;
+        width: 300px;
         height: 100%;
         padding: 20px;
         background-color: #edf1f2;
         border-right: 1px solid @topNavUserBackgroundHover;
         display: block;
         float: left;
+        overflow: hidden;
     }
 
     #body {
-        width: 500px;
         height: 100%;
         padding: 20px;
         display: block;
         overflow: hidden;
-        float: left;
 
         section#sub-nav {
             color: @doveGray;
@@ -107,11 +107,9 @@ footer {
     }
 
     p {
-        font-family:Arial, Helvetica, sans-serif;
         font-size: @baseFontSize;
         color: #898989;
         .font-weight(normal);
-        padding-left: 2px;
         margin-top: 8px;
     }
 }
@@ -125,92 +123,88 @@ footer {
 -------------------------			OTHER LAYOUTs  				------------------------
 --------------------------------------------------------------------------------------*/
 
-.upload-section-block {
+.any-cols {
     display: table;
-    width: 100%;
+
+    .col {
+        display: table-cell;
+        padding-left: 15px;
+    }
 }
 
-.upload-section-block .col1 {
-    width: 80px;
-    float: left;
-}
-
-.upload-section-block .colNext {
-    float: left;
-}
 
 .fifty-fifty {
     display: table;
     width: 100%;
-}
 
-.fifty-fifty .col1 {
-    width: 48%;
-    float: left;
-}
+    .col1 {
+        width: 48%;
+        float: left;
+    }
 
-.fifty-fifty .col2 {
-    width: 50%;
-    float: right;
-    padding-left: 10px;
+    .col2 {
+        width: 50%;
+        float: right;
+        padding-left: 10px;
+    }
 }
 
 .twothirds-onethird {
     display: table;
     width: 100%;
     padding: 0px;
-}
 
-.twothirds-onethird .col1 {
-    display: table-cell;
-    width: 65%;
-    float: left;
-}
+    .col1 {
+        display: table-cell;
+        width: 65%;
+        float: left;
+    }
 
-.twothirds-onethird .col2 {
-    display: table-cell;
-    width: 35%;
-    float: left;
+    .col2 {
+        display: table-cell;
+        width: 35%;
+        float: left;
+    }
 }
 
 .twothirds-onethird-reverse {
     display: table;
     width: 100%;
-}
 
-.twothirds-onethird-reverse .col1 {
-    width: 34%;
-    float: left;
-}
+    .col1 {
+        width: 34%;
+        float: left;
+    }
 
-.twothirds-onethird-reverse .col2 {
-    width: 64%;
-    float: left;
-    padding-left: 15px;
+    .col2 {
+        width: 64%;
+        float: left;
+        padding-left: 15px;
+    }
 }
 
 .third-third-third {
     display: table;
     width: 100%;
     padding: 0px;
-}
 
-.third-third-third .col1 {
-    display: table-cell;
-    width: 32.5%;
-    float: left;
-}
+    .col1 {
+        display: table-cell;
+        width: 32.5%;
+        float: left;
+    }
 
-.third-third-third .col2 {
-    display: table-cell;
-    width: 32.5%;
-    float: left;
-}
+    .col2 {
+        display: table-cell;
+        width: 32.5%;
+        float: left;
+    }
 
-.third-third-third .col3 {
-    display: table-cell;
-    width: 35%;
-    float: left;
+    .col3 {
+        display: table-cell;
+        width: 35%;
+        float: left;
+    }
 }
 
 /*--------------------------------------------------------------------------------------

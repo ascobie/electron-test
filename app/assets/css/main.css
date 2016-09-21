@@ -308,23 +308,23 @@ footer {
   min-height: 425px;
   overflow: hidden;
   width: 100%;
+  min-width: 800px;
 }
 #content nav {
-  width: 250px;
+  width: 300px;
   height: 100%;
   padding: 20px;
   background-color: #edf1f2;
   border-right: 1px solid #666666;
   display: block;
   float: left;
+  overflow: hidden;
 }
 #content #body {
-  width: 500px;
   height: 100%;
   padding: 20px;
   display: block;
   overflow: hidden;
-  float: left;
 }
 #content #body section#sub-nav {
   color: #666666;
@@ -362,10 +362,8 @@ footer {
   font-weight: normal;
 }
 #content p {
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 10pt;
   color: #898989;
-  padding-left: 2px;
   margin-top: 8px;
 }
 .wrapper {
@@ -374,16 +372,12 @@ footer {
 /*--------------------------------------------------------------------------------------
 -------------------------			OTHER LAYOUTs  				------------------------
 --------------------------------------------------------------------------------------*/
-.upload-section-block {
+.any-cols {
   display: table;
-  width: 100%;
 }
-.upload-section-block .col1 {
-  width: 80px;
-  float: left;
-}
-.upload-section-block .colNext {
-  float: left;
+.any-cols .col {
+  display: table-cell;
+  padding-left: 15px;
 }
 .fifty-fifty {
   display: table;
@@ -1746,10 +1740,8 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
-#sub-navigation ul li a .selected {
-  color: #fff;
-}
-#sub-navigation ul li a:hover {
+#sub-navigation ul li a:hover,
+#sub-navigation ul li a.active {
   color: #fff;
 }
 #sub-navigation ul li span {
@@ -1757,6 +1749,67 @@ footer {
   display: block;
   line-height: 10px;
   padding: 7px 10px 0px 10px;
+}
+.fieldset-data h2 {
+  color: #008272;
+  font-size: 11pt;
+  padding-left: 5px;
+}
+.fieldset-data span {
+  color: #008272;
+  display: block;
+  font-size: 11pt;
+  padding: 0px;
+  margin-left: 4px;
+  line-height: 2;
+}
+.fieldset-data fieldset {
+  padding-bottom: 5px;
+}
+.fieldset-data fieldset legend {
+  width: 100%;
+}
+.fieldset-data fieldset legend h2 {
+  color: #008272;
+  font-size: 14pt;
+  line-height: 1;
+  padding: 5px 0px 5px 4px;
+}
+.fieldset-data fieldset h3 {
+  padding: 15px 0 5px 5px;
+  font-family: wf_segoe-ui_semibold, 'Segoe UI Semibold', 'Segoe WP Semibold', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+  font-weight: normal;
+}
+.fieldset-data fieldset .control-group {
+  width: 100%;
+  margin-left: 0px;
+  margin-bottom: 10px;
+}
+.fieldset-data fieldset .control-group .control-label {
+  width: 80px !important;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  font-size: 10.5pt;
+}
+.fieldset-data fieldset .control-group p {
+  padding: 5px;
+  margin: 0px;
+  margin-top: 0px !important;
+  overflow: hidden;
+}
+.fieldset-data fieldset .control-group a {
+  display: block;
+}
+.fieldset-data fieldset .control-group a i {
+  padding-left: 4px;
+}
+.my-grid {
+  width: 100%;
+  border-top: 1px solid #CCC;
+  padding: 0px !important;
+  margin-top: 10px;
+  overflow: hidden;
 }
 .my-grid md-list-item > p,
 .my-grid md-list-item > .md-list-item-inner > p,

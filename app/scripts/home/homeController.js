@@ -14,14 +14,14 @@
 
         $scope.login = function () {
             console.log("$scope.login");
-            // this is what the o365 app did
-            //window.location.href = "http://localhost:3000/auth";
-            adalService.login();
+            // todo: not working
+            // adalService.login();
         };
 
         $scope.logout = function () {
             console.log("$scope.logout");
-            adalService.logOut();
+            // todo: not working
+            // adalService.logOut();
         };
 
         $scope.isActive = function (viewLocation) {

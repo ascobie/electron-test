@@ -1,21 +1,46 @@
 
 <nav>
     <h1>Accounts</h1>
-    <md-list class="my-grid" style="width:100%;border: 1px solid #CCC;padding:0px">
-        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="account in _ctrl.accounts">
-            <p ng-click="_ctrl.selectAccount(account, $index)"> {{account.name}} </p>
+    <md-list class="my-grid">
+        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="account in _ctrl.accounts" style="min-height:40px !important;padding:0px;border-bottom: 1px solid #CCC;">
+            <p ng-click="_ctrl.selectAccount(account, $index)" title="{{account.url}}">{{account.url}}</p>
         </md-list-item>
     </md-list>
-    <p><a href="javascript:void(0);" ng-click="_ctrl.state('add')">Add Account</a></p>
+    <p style="margin-top:20px;">
+        <a href="javascript:void(0);" ng-click="_ctrl.state('add')">add</a> | 
+        <a href="javascript:void(0);" ng-click="_ctrl.state('edit')">edit selected</a> | 
+        <a href="javascript:void(0);" ng-click="_ctrl.state('delete')">delete selected</a>
+    </p>
 </nav>
 <div id="body">
     <h1>Account Details</h1>
 
-    <div ng-show="_ctrl.selected" class="form-inline-block">
-        <p>This is the currently selected account</p>
-        <p>selected: {{_ctrl.selected.name}} </p>
+    <!-- form for viewing the selected account -->
+    <div ng-show="_ctrl.selected" class="form-horizontal">
+        <p>Details of the currently selected account</p>
+        <div class="fieldset-data">
+            <fieldset>
+                <section class="control-group">
+                    <label class="control-label" for="spnAlias">Alias:</label>
+                    <p id="spnAlias">{{_ctrl.selected.alias}}</p>
+                </section>
+                <section class="control-group">
+                    <label class="control-label" for="spnAccount">Account:</label>
+                    <p id="spnAccount">{{_ctrl.selected.name}}</p>
+                </section>
+                <section class="control-group">
+                    <label class="control-label" for="spnUrl">URL:</label>
+                    <p id="spnUrl">{{_ctrl.selected.url}}</p>
+                </section>
+                <section class="control-group">
+                    <label class="control-label" for="spnKey">Key:</label>
+                    <p id="spnKey">##### (hidden)</p>
+                </section>
+            </fieldset>
+        </div>
     </div>
 
+    <!-- form for adding a new account -->
     <div ng-show="_ctrl.adding" class="form-inline-block">
         <p>Add an account and key for retrieving Batch account data</p>
         <form name="addAccountForm">
@@ -41,5 +66,15 @@
                 </ul>
             </div>
         </div>
+    </div>
+
+    <!-- form for editing the selected account -->
+    <div ng-show="_ctrl.editing" class="form-inline-block">
+        <p>Edit not implemented</p>
+    </div>
+
+    <!-- form for removing the selected account -->
+    <div ng-show="_ctrl.deleting" class="form-inline-block">
+        <p>Delete not implemented</p>
     </div>
 </div>

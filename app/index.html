@@ -58,17 +58,19 @@
         
         <section id="sub-navigation" style="height: 50px;">
             <ul>
-                <li><a href="index.html#!/accounts">Accounts</a></li>
+                <li><a href="index.html#!/accounts" ng-class="isActive('/accounts') ? 'active' : ''">Accounts</a></li>
                 <li><span>|</span></li>
-                <li><a href="index.html#!/pools">Pools</a></li>
+                <li><a href="index.html#!/pools" ng-class="isActive('/pools') ? 'active' : ''">Pools</a></li>
                 <li><span>|</span></li>
-                <li><a href="index.html#!/jobs">Jobs</a></li>
+                <li><a href="index.html#!/jobs" ng-class="isActive('/jobs') ? 'active' : ''">Jobs</a></li>
                 <li><span>|</span></li>
-                <li><a href="index.html#!/jobschedules">Job Schedules</a></li>
+                <li><a href="index.html#!/jobschedules" ng-class="isActive('/jobschedules') ? 'active' : ''">Job Schedules</a></li>
             </ul>
         </section>
 
         <section id="content">
+            <!-- main content injection point for angular -->
+            <!-- hopefully angular 2.0 will be better -->
             <ng-view></ng-view>
         </section>
 
