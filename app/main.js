@@ -4,6 +4,7 @@ const { app, BrowserWindow } = electron;
 const path = require('path');
 const restify = require('restify');
 const storage = require('electron-json-storage');
+const batch = require('azure-batch');
 const Q = require('Q');
 
 let mainWindow = null;
@@ -75,7 +76,6 @@ server.get('/accounts', (req, res, next) => {
     storage.get("accounts", function(error, data) {
         if (error) throw error;
         if (Array.isArray(data)) {
-            console.log("GET:/accounts:", data.length)
             res.send(data);
         }
 
@@ -96,6 +96,26 @@ server.post('/accounts', (req, res, next) => {
         saveToStorage('accounts', accountArray.filter(item => item !== null)).then(function (response) {
             res.send(201);
         });
+    });
+});
+
+server.get('/jobs', (req, res, next) => {
+    console.log("/jobs: ", req.params)
+
+    options.jobListOptions = { maxResults : 25 };
+
+    client.job.list(options, function (error, result) {
+        var loop = function (nextLink) {
+            if (nextLink !== null && nextLink !== undefined) {
+                client.job.listNext(nextLink, function (err, res) {
+                    console.log(res);
+                    loop(res.odatanextLink);
+                });
+            }
+        };
+    
+        loop(result.odatanextLink);
+        res.send(result);
     });
 });
 
@@ -132,20 +152,5 @@ function saveToStorage(fileName, jsonData) {
 
 function logError(message) {
   let code = "window.localStorage.setItem('error', '" + message + "');";
-  mainWindow.webContents.executeJavaScript(code);
-}
-
-function saveTokens() {
-  let code = "window.localStorage.setItem('accessToken', '" + accessToken + "');";
-  mainWindow.webContents.executeJavaScript(code);
-}
-
-function saveUser() {
-  let code = "window.localStorage.setItem('user', '" + JSON.stringify(user) + "');";
-  mainWindow.webContents.executeJavaScript(code);
-}
-
-function clearStorage(){
-  let code = "window.localStorage.clear()";
   mainWindow.webContents.executeJavaScript(code);
 }

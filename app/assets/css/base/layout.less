@@ -46,14 +46,20 @@ footer {
     min-width: 800px;
 
     nav {
-        width: 300px;
+        width: 400px;
         height: 100%;
         padding: 20px;
         background-color: #edf1f2;
         border-right: 1px solid @topNavUserBackgroundHover;
         display: block;
         float: left;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        select {
+            width: 100%;
+            margin-top: 4px;
+        }
     }
 
     #body {
@@ -64,8 +70,8 @@ footer {
 
         section#sub-nav {
             color: @doveGray;
-            margin-top: -28px; 
-            .font-weight(normal);
+            margin-top: 0px; 
+            .font-weight(semibold);
             color: #858585;
 
             ul {

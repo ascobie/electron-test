@@ -7,29 +7,24 @@
     
     function AccountController(accountService, $q, $scope) {
         var self = this;
-
-        self.selected = null;
         self.accounts = [];
-        self.selectedIndex = 0;
+        self.selected = {};
         self.validationErrors = [];
         self.filterText = null;
-        self.selectAccount = selectAccount;
         self.state = state;
         self.adding = false;
         self.editing = false;
         self.deleting = false;
-        self.selected = false;
+        self.viewing = false;
+        self.selectAccount = function (account, index) {
+            self.selected = angular.isNumber(index) ? self.accounts[index] : account;
+            state('view')
+        };
 
         $scope.master = {};
 
-        // Load initial data
+        // load initial data
         loadAccounts();
-        
-        function selectAccount(account, index) {
-            state('select')
-            self.selected = angular.isNumber(index) ? self.accounts[index] : account;
-            self.selectedIndex = index;
-        }
 
         function loadAccounts() {
             accountService.list().then(function (accounts) {
@@ -47,9 +42,9 @@
 
         function state(myState) {
             self.adding = myState == "add";
-            self.selected = myState == "selected";
-            self.editing = myState == "edit";
+            self.viewing = myState == "view";
             self.deleting = myState == "delete";
+            self.editing = myState == "edit";
         }
 
         function validateAccount(account) {

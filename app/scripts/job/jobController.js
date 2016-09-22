@@ -3,32 +3,41 @@
 
     angular
         .module('app')
-        .controller('jobController', ['jobService', '$q', '$mdDialog', 'adalAuthenticationService', JobController]);
+        .controller('jobController', [
+            'jobService', 
+            '$q', 
+            '$mdDialog', 
+            '$scope', 
+            '$http',
+            JobController
+        ]);
     
-    function JobController(jobService, $q, $mdDialog, adalService) {
+    function JobController(jobService, $q, $mdDialog, $scope, $http) {
         var self = this;
-
-        self.selected = null;
         self.jobs = [];
-        self.selectedIndex = 0;
+        self.selected = {};
+        self.account = {};
         self.filterText = null;
-        self.selectJob = selectJob;
+        self.selectJob = function (job, index) {
+            self.selected = angular.isNumber(index) ? self.jobs[index] : job;
+        };
 
-        // Load initial data
+        // load initial data
         loadJobs();
-        
-        function selectJob(job, index) {
-            console.log("JobController.selectJob");
-            self.selected = angular.isNumber(job) ? self.subscriptions[job] : job;
-            self.selectedIndex = angular.isNumber(job) ? job: index;
-        }
 
         function loadJobs() {
-            console.log("JobController.loadJobs");
-            jobService.list().then(function (jobs) {
-                self.jobs = [].concat(jobs);
-                self.selected = jobs[0];
-            });
+            $http.get("http://localhost:3000/jobs").then(
+                function (response) {
+                    self.jobs = response.data; 
+                }, function (error) {
+                    console.log("loadJobs():error: ", error)
+                }
+            );
         }
+
+        $scope.$on("accountSelected", function(event, account) {
+            console.log("accountSelected::JobController - ", account);
+            self.account = account;
+        });
     }
 })();

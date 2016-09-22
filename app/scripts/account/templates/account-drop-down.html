@@ -1,0 +1,5 @@
+<select 
+    data-ng-model="_ctrl.account" 
+    data-ng-options="acc.alias for acc in _ctrl.accounts"
+    ng-change="_ctrl.onAccountChange()" 
+/>

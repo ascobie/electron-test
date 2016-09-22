@@ -16,7 +16,7 @@
     <h1>Account Details</h1>
 
     <!-- form for viewing the selected account -->
-    <div ng-show="_ctrl.selected" class="form-horizontal">
+    <div ng-show="_ctrl.viewing" class="form-horizontal">
         <p>Details of the currently selected account</p>
         <div class="fieldset-data">
             <fieldset>
@@ -43,12 +43,12 @@
     <!-- form for adding a new account -->
     <div ng-show="_ctrl.adding" class="form-inline-block">
         <p>Add an account and key for retrieving Batch account data</p>
-        <form name="addAccountForm">
-            <input type="text" ng-model="account.alias" class="form-control" placeholder="account alias ..." required="required" />
-            <input type="text" ng-model="account.name" class="form-control" placeholder="account name ..." required="required" />
-            <input type="text" ng-model="account.url" class="form-control-wide" placeholder="batch service url ..." required="required" />
-            <input type="text" ng-model="account.key" class="form-control-wide" placeholder="account key ..." required="required" />
-            <input type="checkbox" ng-model="account.isDefault" value="false" />&nbsp;<span>default account</span>
+        <form name="addAccountForm" novalidate="novalidate">
+            <input type="text" ng-model="account.alias" class="form-input" placeholder="account alias ..." required="required" />
+            <input type="text" ng-model="account.name" class="form-input" placeholder="account name ..." required="required" />
+            <input type="text" ng-model="account.url" class="form-input-wide" placeholder="batch service url ..." required="required" />
+            <input type="text" ng-model="account.key" class="form-input-wide" placeholder="account key ..." required="required" />
+            <input type="checkbox" ng-model="account.isDefault" value="false" />&nbsp;<span>set as default account</span>
         </form>
 
         <p>&nbsp;</p>

@@ -1,13 +1,9 @@
 
 <nav>
     <h1>Pools</h1>
-    <md-list class="my-grid" style="width:100%;border: 1px solid #CCC;padding:0px">
-        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="pool in _ctrl.pools">
-            <p> {{pool.name}} </p>
-            <md-checkbox class="md-secondary" ng-model="pool.wanted" ng-click="_ctrl.selectPool(pool, $index)" aria-label="{{pool.name}}"></md-checkbox>
-        </md-list-item>
-    </md-list>
+    <account-drop-down></account-drop-down>
 </nav>
 <div id="body">
     <h1>Pool Details</h1>
+    <p>Selected account: {{_ctrl.account.url}}</p>
 </div>

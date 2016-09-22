@@ -3,25 +3,20 @@
 
     angular
         .module('app')
-        .controller('poolController', ['poolService', '$q', '$mdDialog', 'adalAuthenticationService', PoolController]);
+        .controller('poolController', ['poolService', '$q', '$mdDialog', '$scope', PoolController]);
     
-    function PoolController(poolService, $q, $mdDialog, adalService) {
+    function PoolController(poolService, $q, $mdDialog, $scope) {
         var self = this;
-        
-        self.selected = null;
         self.pools = [];
-        self.selectedIndex = 0;
+        self.selected = {};
         self.filterText = null;
-        self.selectPool = selectPool;
-
-        // Load initial data
-        loadPools();
-
-        function selectPool(pool, index) {
+        self.selectPool = function (pool, index) {
             console.log("PoolController.selectPool");
-            self.selected = angular.isNumber(pool) ? self.subscriptions[pool] : pool;
-            self.selectedIndex = angular.isNumber(pool) ? pool: index;
-        }
+            self.selected = angular.isNumber(index) ? self.pools[index] : pool;
+        };
+
+        // load initial data
+        loadPools();
 
         function loadPools() {
             console.log("PoolController.loadPools");
@@ -30,5 +25,10 @@
                 self.selected = pools[0];
             });
         }
+
+        $scope.$on("accountSelected", function(event, account) {
+            console.log("accountSelected::PoolController - ", account);
+            self.account = account;
+        });
     }
 })();

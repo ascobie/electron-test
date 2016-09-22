@@ -81,13 +81,12 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
     display: block;
-    height: 1.5em;
+    height: 2.5em;
     padding: 6px 6px;
     margin-bottom: @baseLineHeight / 2;
     font-size: @baseFontSize;
     line-height: @baseLineHeight;
     color: @doveGray;
-    vertical-align: middle;
 }
 
 // Reset appearance properties for textual inputs and textarea
@@ -154,10 +153,9 @@ input[type="checkbox"] {
 // Set the height of select and file controls to match text inputs
 select,
 input[type="file"] {
-  height: 2em; /* In IE7, the height of the select element cannot be changed by height, only font-size */
+  height: 2.5em; /* In IE7, the height of the select element cannot be changed by height, only font-size */
   *margin-top: 4px; /* For IE7, add top margin to align select with labels */
   line-height: @inputHeight;
-
 }
 
 // Make select elements obey height by applying a border
@@ -170,7 +168,7 @@ select {
         border-color: @deepSeaGreen;
         outline: 0;
         outline: thin dotted \9; /* IE6-9 */
-        .box-shadow(inset 0 1px 1px rgba(60,133,133,.6));
+        .box-shadow(0 0 8px rgba(60,133,133,.6));
     }
 }
 
@@ -191,7 +189,7 @@ select:focus,
 input[type="file"]:focus {
     outline: 0;
     outline: thin dotted \9; /* IE6-9 */
-    .box-shadow(inset 0 1px 1px rgba(60,133,133,.6));
+    .box-shadow(0 0 8px rgba(60,133,133,.6));
     border-color: @deepSeaGreen;
 }
 
@@ -205,7 +203,7 @@ input[type="file"]:focus {
   color: @silverGray;
   background-color: darken(@inputBackground, 1%);
   border-color: @inputBorder;
-  .box-shadow(inset 0 1px 2px rgba(0,0,0,.025));
+  .box-shadow(0 1px 2px rgba(0,0,0,.025));
   cursor: not-allowed;
 }
 
@@ -553,7 +551,7 @@ legend + .control-group {
     display: block;
     margin-bottom: 10px;
 
-    .form-control-suffix {
+    .form-input-suffix {
         float: right;
         text-align: right;
         margin-top: -10px;
@@ -582,33 +580,32 @@ legend + .control-group {
     }
 }
 
-.form-control-small {
+.form-input-small {
     width: 60px;
     padding: 4px 6px !important;
 }
 
-.form-control {
+.form-input {
     width: 220px;
     margin-bottom: 15px !important;
 }
 
-.form-control-wide {
+.form-input-wide {
     width: 380px;
     margin-bottom: 15px !important;
 }
 
-.form-control-extrawide {
+.form-input-extrawide {
     width: 500px;
     margin-bottom: 15px !important;
 }
 
-.form-control-appimage[disabled], 
-.form-control-small[disabled], 
-.form-control-small[readonly] {
+.form-input-small[disabled], 
+.form-input-small[readonly] {
     background-color: #f0f0f0 !important;
 }
 
-select.form-control-wide {
+select.form-input-wide {
     width: 394px;
     height: 35px;
 }
@@ -721,14 +718,20 @@ select.form-control-wide {
 // Validations
 
 .input-validation-error {
-    display: inline-table;
+    display: block;
     width: 380px;
     border: 1px solid @alert-danger-text !important;
     color: @alert-danger-text;
+    margin-top: 10px;
 
     ul {
       list-style-type: disc;
       margin-left: 30px;
+      padding-top: 8px;
+
+      li {
+        line-height: 1.7em;
+      }
     }
 }
 

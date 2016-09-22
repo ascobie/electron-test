@@ -1,13 +1,46 @@
 
 <nav>
     <h1>Jobs</h1>
-    <md-list class="my-grid" style="width:100%;border: 1px solid #CCC;padding:0px">
-        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="job in _ctrl.jobs">
-            <p> {{job.name}} </p>
-            <md-checkbox class="md-secondary" ng-model="job.wanted" ng-click="_ctrl.selectJob(job, $index)" aria-label="{{job.name}}"></md-checkbox>
+    <account-drop-down></account-drop-down>
+    <md-list class="my-grid">
+        <md-list-item md-ink-ripple="#03A9F4" ng-repeat="job in _ctrl.jobs" style="min-height:40px !important;padding:0px;border-bottom: 1px solid #CCC;">
+            <p ng-click="_ctrl.selectAccount(job, $index)" title="{{job.id}} - {{job.displayName}}">{{job.id}}</p>
         </md-list-item>
     </md-list>
 </nav>
 <div id="body">
     <h1>Job Details</h1>
+    <p>Selected account: {{_ctrl.account.url}}</p>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" target="_self" href="#overview">Overview</a></li>
+        <li><a data-toggle="tab" target="_self" href="#properties">Properties</a></li>
+        <li><a data-toggle="tab" target="_self" href="#env">Environment settings</a></li>
+        <li><a data-toggle="tab" target="_self" href="#metadata">Metadata</a></li>
+        <li><a data-toggle="tab" target="_self" href="#tasks">Tasks</a></li>
+        <li><a data-toggle="tab" target="_self" href="#prep">Preparation tasks</a></li>
+        <li><a data-toggle="tab" target="_self" href="#release">Release tasks</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="overview" class="wrapper tab-pane fade in active">
+            <h3>overview</h3>
+        </div>
+        <div id="properties" class="wrapper tab-pane fade">
+            <h3>properties</h3>
+        </div>
+        <div id="env" class="wrapper tab-pane fade">
+            <h3>env</h3>
+        </div>
+        <div id="metadata" class="wrapper tab-pane fade">
+            <h3>metadata</h3>
+        </div>
+        <div id="tasks" class="wrapper tab-pane fade">
+            <h3>tasks</h3>
+        </div>
+        <div id="prep" class="wrapper tab-pane fade">
+            <h3>prep</h3>
+        </div>
+        <div id="release" class="wrapper tab-pane fade">
+            <h3>release</h3>
+        </div>
+    </div>
 </div>

@@ -311,14 +311,19 @@ footer {
   min-width: 800px;
 }
 #content nav {
-  width: 300px;
+  width: 400px;
   height: 100%;
   padding: 20px;
   background-color: #edf1f2;
   border-right: 1px solid #666666;
   display: block;
   float: left;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#content nav select {
+  width: 100%;
+  margin-top: 4px;
 }
 #content #body {
   height: 100%;
@@ -328,7 +333,7 @@ footer {
 }
 #content #body section#sub-nav {
   color: #666666;
-  margin-top: -28px;
+  margin-top: 0px;
   color: #858585;
 }
 #content #body section#sub-nav ul {
@@ -509,13 +514,12 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: block;
-  height: 1.5em;
+  height: 2.5em;
   padding: 6px 6px;
   margin-bottom: 0.7;
   font-size: 10pt;
   line-height: 1.4;
   color: #666666;
-  vertical-align: middle;
 }
 input,
 textarea,
@@ -587,7 +591,7 @@ input[type="checkbox"] {
 }
 select,
 input[type="file"] {
-  height: 2em;
+  height: 2.5em;
   /* In IE7, the height of the select element cannot be changed by height, only font-size */
   *margin-top: 4px;
   /* For IE7, add top margin to align select with labels */
@@ -602,9 +606,9 @@ select:focus {
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
-  -webkit-box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
-  box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
+  -webkit-box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
+  -moz-box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
+  box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
 }
 select[multiple],
 select[size] {
@@ -621,9 +625,9 @@ input[type="file"]:focus {
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
-  -webkit-box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
-  box-shadow: inset 0 1px 1px rgba(60, 133, 133, 0.6);
+  -webkit-box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
+  -moz-box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
+  box-shadow: 0 0 8px rgba(60, 133, 133, 0.6);
   border-color: #008272;
 }
 .uneditable-input,
@@ -631,9 +635,9 @@ input[type="file"]:focus {
   color: #cccccc;
   background-color: #f5f5f5;
   border-color: #cccccc;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
-  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
   cursor: not-allowed;
 }
 .uneditable-input {
@@ -984,7 +988,7 @@ legend + .control-group {
   display: block;
   margin-bottom: 10px;
 }
-.inline-control-group .form-control-suffix {
+.inline-control-group .form-input-suffix {
   float: right;
   text-align: right;
   margin-top: -10px;
@@ -1008,28 +1012,27 @@ legend + .control-group {
   float: right;
   margin-right: 4px;
 }
-.form-control-small {
+.form-input-small {
   width: 60px;
   padding: 4px 6px !important;
 }
-.form-control {
+.form-input {
   width: 220px;
   margin-bottom: 15px !important;
 }
-.form-control-wide {
+.form-input-wide {
   width: 380px;
   margin-bottom: 15px !important;
 }
-.form-control-extrawide {
+.form-input-extrawide {
   width: 500px;
   margin-bottom: 15px !important;
 }
-.form-control-appimage[disabled],
-.form-control-small[disabled],
-.form-control-small[readonly] {
+.form-input-small[disabled],
+.form-input-small[readonly] {
   background-color: #f0f0f0 !important;
 }
-select.form-control-wide {
+select.form-input-wide {
   width: 394px;
   height: 35px;
 }
@@ -1121,14 +1124,19 @@ select.form-control-wide {
   bordeborder-color: #bd362f;
 }
 .input-validation-error {
-  display: inline-table;
+  display: block;
   width: 380px;
   border: 1px solid #bd362f !important;
   color: #bd362f;
+  margin-top: 10px;
 }
 .input-validation-error ul {
   list-style-type: disc;
   margin-left: 30px;
+  padding-top: 8px;
+}
+.input-validation-error ul li {
+  line-height: 1.7em;
 }
 .fx-loading-indicator {
   background-image: url(images/validation/validation-pending.gif);
@@ -1607,6 +1615,7 @@ footer {
 }
 #footer p {
   color: #edf1f2;
+  margin-top: 15px;
 }
 #loading-wrapper {
   height: 50%;
@@ -1810,6 +1819,9 @@ footer {
   padding: 0px !important;
   margin-top: 10px;
   overflow: hidden;
+}
+.my-grid p:focus {
+  border: none;
 }
 .my-grid md-list-item > p,
 .my-grid md-list-item > .md-list-item-inner > p,
