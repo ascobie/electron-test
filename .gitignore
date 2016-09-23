@@ -254,4 +254,6 @@ paket-files/
 # dist and build directories
 dist/
 build/
+app/assets/vendor/
+
 
