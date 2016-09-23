@@ -1,6 +1,7 @@
+
 (function () {
     'use strict';
-        
+
     const _templateBase = './scripts';
     const app = angular.module('app', ['ngRoute', 'ngMaterial', 'ngAnimate']);
 
