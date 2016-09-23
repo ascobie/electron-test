@@ -1,40 +1,4 @@
 ﻿# From ... 
 # https://scotch.io/tutorials/creating-desktop-applications-with-angularjs-and-github-electron
 
-npm install (installs whatever is in the devDependencies)
 add node-modules/.bin to the PATH
-
-npm install -g gulp
-npm install gulp --save-dev (adds it to devDependencies in package.json)
-
-npm install -g bower
-
-npm install --save gulp-uglify gulp-minify-css gulp-usemin
-
-npm install --save q asar fs-jetpack recedit.
-npm install -g less
-
-lessc assets/css/main.less assets/css/main.css
-lessc --clean-css assets/css/main.less assets/css/main.min.css
-
-npm install gulp-less
-
-https://github.com/Cecildt/angular2-O365-desktop-app/blob/master/src/home/home.ts
-https://devlaundry.com/office-365-desktop-application-with-angular-2-and-electron/
-https://github.com/Cecildt/angular2-O365-desktop-app
-https://github.com/azure-samples?query=active-directory
-
-
-commands 
-########
-
-run: gulp run
-
-build: gulp build
-
-build and package installer: gulp build-electron
-
-npm install browserify -g
-http://azure.github.io/azure-sdk-for-node/azure-batch/latest/
-
-browserify batch.js > batch-client.js

@@ -255,4 +255,4 @@ dist/
 build/
 app/assets/vendor/
 node_modules/
-
+typings/
