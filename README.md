@@ -24,20 +24,20 @@ Press ctrl + shift + b to run the app
 All of the build, package, and run commands are in the gulp file: **gulpfile.js**
 
 ### build the less stylesheets
-**gulp** build-less
+gulp build-less
 
 ### create the main run task 
-**gulp** run
+gulp run
 
 ### clean build directory if it already exists.
-**gulp** clean
+gulp clean
 
 ### copy application files into build directory
-**gulp** copy
+gulp copy
 
 ### compiles down all the CSS and JS and copies the applicaiton files into the build directory
-**gulp** build
+gulp build
 
 ### execute the build script and build a package installer
-**gulp** build-electron
+gulp build-electron
 

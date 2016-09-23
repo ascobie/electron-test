@@ -22,6 +22,12 @@
             self.selected = angular.isNumber(index) ? self.jobs[index] : job;
         };
 
+        $scope.$on("accountSelected", function(event, account) {
+            console.log("accountSelected::JobController - ", account);
+            self.account = account;
+            loadJobs();
+        });
+
         function loadJobs() {
             if (!self.account.key) {
                 console.log("loadJobs():error: account not set")
@@ -36,12 +42,6 @@
                 }
             );
         }
-
-        $scope.$on("accountSelected", function(event, account) {
-            console.log("accountSelected::JobController - ", account);
-            self.account = account;
-            loadJobs();
-        });
 
         function jobsUrl(account) {
             return "http://localhost:3000/jobs?account=" + account.name + "&key=" + encodeURIComponent(account.key) + "&url=" + account.url; 
