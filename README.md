@@ -5,6 +5,8 @@ First look into building an Electron app with Angular and Node.js
 Install all the dependancies for this application
 
 ### pre-install steps
+Install Node.js from <https://nodejs.org/en/download/>. also make sure you update npm to the latest current version: *npm install npm -g*
+
 * npm install -g bower
 * npm install -g less
 
