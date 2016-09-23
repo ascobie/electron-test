@@ -3,9 +3,9 @@
 
     angular
         .module("app")
-        .controller("homeController", ["electronService", "$scope", "adalAuthenticationService", "$location", HomeController]);
+        .controller("homeController", ["electronService", "$scope", "$location", HomeController]);
 
-    function HomeController(electronService, $scope, adalService, $location) {
+    function HomeController(electronService, $scope, $location) {
         var self = this;
         
         $scope.systemInfo = {};

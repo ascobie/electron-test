@@ -100,21 +100,30 @@ server.post('/accounts', (req, res, next) => {
 });
 
 server.get('/jobs', (req, res, next) => {
-    console.log("/jobs: ", req.params)
-
-    options.jobListOptions = { maxResults : 25 };
+    console.log("/jobs: ", req.query)
+    const credentials = new batch.SharedKeyCredentials(req.query.account, req.query.key);
+    const client = new batch.ServiceClient(credentials, req.query.url);
+    const options = {}
+    options.jobListOptions = { 
+        maxResults : 25,
+        select: "id,displayName,state,creationTime,poolInfo"
+    };
 
     client.job.list(options, function (error, result) {
         var loop = function (nextLink) {
             if (nextLink !== null && nextLink !== undefined) {
                 client.job.listNext(nextLink, function (err, res) {
-                    console.log(res);
+                    console.log("loop result: ", res);
                     loop(res.odatanextLink);
                 });
             }
         };
-    
-        loop(result.odatanextLink);
+
+        if (error) throw error;
+        if (result) {
+            loop(result.odatanextLink);
+        }
+       
         res.send(result);
     });
 });

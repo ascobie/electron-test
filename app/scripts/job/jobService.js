@@ -11,6 +11,7 @@
             getById: getJobById
         };
 
+        // todo: replace this with a call to Batch ... 
         function listJobs() {
             console.log("JobService.listJobs");
             var deferred = $q.defer();

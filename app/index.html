@@ -33,10 +33,12 @@
     <script type="text/javascript" src="./assets/vendor/angular-aria/angular-aria.js"></script>
     <script type="text/javascript" src="./assets/vendor/angular-material/angular-material.js"></script>
     <script type="text/javascript" src="./assets/vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/vendor/semantic/dist/semantic.js"></script>
     <!-- endbuild -->
     <script>if (window.module) module = window.module;</script>
 
     <!-- build:css assets/css/app.css -->
+    <link rel="stylesheet" href="./assets/vendor/semantic/dist/semantic.css" type="text/css" />
     <link rel="stylesheet" href="./assets/vendor/bootstrap/dist/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="./assets/vendor/angular-material/angular-material.css" type="text/css" />
     <link rel="stylesheet" href="./assets/css/main.css" type="text/css" />
@@ -66,8 +68,6 @@
                 <li><a href="index.html#!/pools" ng-class="isActive('/pools') ? 'active' : ''">Pools</a></li>
                 <li><span>|</span></li>
                 <li><a href="index.html#!/jobs" ng-class="isActive('/jobs') ? 'active' : ''">Jobs</a></li>
-                <li><span>|</span></li>
-                <li><a href="index.html#!/jobschedules" ng-class="isActive('/jobschedules') ? 'active' : ''">Job Schedules</a></li>
             </ul>
         </section>
 
@@ -90,8 +90,6 @@
 
     <!-- build:app scripts/site.js -->
     <script src="./scripts/app.js"></script>
-    <script src="./assets/vendor/adal-angular-experimental/lib/adal.js"></script>
-    <script src="./assets/vendor/adal-angular-experimental/lib/adal-angular.js"></script>
     <script src="./scripts/pool/poolService.js"></script>
     <script src="./scripts/pool/poolController.js"></script>
     <script src="./scripts/job/jobService.js"></script>
@@ -99,8 +97,6 @@
     <script src="./scripts/account/accountService.js"></script>
     <script src="./scripts/account/accountController.js"></script>
     <script src="./scripts/account/components/account-list.js"></script>
-    <script src="./scripts/jobSchedule/jobScheduleService.js"></script>
-    <script src="./scripts/jobSchedule/jobScheduleController.js"></script>
     <script src="./scripts/home/homeController.js"></script>
     <script src="./scripts/home/components/login.js"></script>
     <script src="./scripts/home/components/footerInfo.js"></script>

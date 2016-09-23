@@ -33,3 +33,8 @@ run: gulp run
 build: gulp build
 
 build and package installer: gulp build-electron
+
+npm install browserify -g
+http://azure.github.io/azure-sdk-for-node/azure-batch/latest/
+
+browserify batch.js > batch-client.js

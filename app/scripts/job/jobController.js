@@ -6,13 +6,12 @@
         .controller('jobController', [
             'jobService', 
             '$q', 
-            '$mdDialog', 
             '$scope', 
             '$http',
             JobController
         ]);
     
-    function JobController(jobService, $q, $mdDialog, $scope, $http) {
+    function JobController(jobService, $q, $scope, $http) {
         var self = this;
         self.jobs = [];
         self.selected = {};
@@ -22,11 +21,13 @@
             self.selected = angular.isNumber(index) ? self.jobs[index] : job;
         };
 
-        // load initial data
-        loadJobs();
-
         function loadJobs() {
-            $http.get("http://localhost:3000/jobs").then(
+            if (!self.account.key) {
+                console.log("loadJobs():error: account not set")
+                return;
+            }
+
+            $http.get(jobsUrl(self.account)).then(
                 function (response) {
                     self.jobs = response.data; 
                 }, function (error) {
@@ -38,6 +39,11 @@
         $scope.$on("accountSelected", function(event, account) {
             console.log("accountSelected::JobController - ", account);
             self.account = account;
+            loadJobs();
         });
+
+        function jobsUrl(account) {
+            return "http://localhost:3000/jobs?account=" + account.name + "&key=" + encodeURIComponent(account.key) + "&url=" + account.url; 
+        }
     }
 })();

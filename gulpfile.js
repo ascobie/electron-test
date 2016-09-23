@@ -12,7 +12,7 @@ var srcDir          = projectDir.cwd('./app');
 var destDir         = projectDir.cwd('./build');
 
 // for builds 
-var release_windows = require('./build.windows'); 
+var release_windows = require('./resources/windows/build.windows'); 
 var os = require('os'); 
 
 // build the less stylesheets

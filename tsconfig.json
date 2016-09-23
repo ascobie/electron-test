@@ -1,11 +1,13 @@
 ﻿{
     "compilerOptions": {
-        "target": "ES5",
+        "target": "es5",
         "module": "commonjs",
-        "removeComments": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "sourceMap": true
+        "removeComments": false,
+        "noImplicitAny": false
     },
     "files": [
         "app/app.ts"
