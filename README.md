@@ -18,6 +18,8 @@ Install Node.js from <https://nodejs.org/en/download/>. also make sure you updat
 ### install the node dependencies for the app runtime
 4. npm install 
 
+Add the node_modules bin folder to the path environment setting: <path-to-repo>\electron-test\node_modules\.bin
+
 ## running the electron app
 Open the electron-test folder in Visual Studio Code.
 Press ctrl + shift + b to run the app
