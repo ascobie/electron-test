@@ -2,6 +2,9 @@
 (function () {
     'use strict';
 
+    var batch = require("./batch-client");
+
+
     angular
         .module('app')
         .controller('jobController', [
@@ -29,6 +32,9 @@
         });
 
         function loadJobs() {
+
+            console.log("batch: ", batch.batchClient);
+
             if (!self.account.key) {
                 console.log("loadJobs():error: account not set")
                 return;

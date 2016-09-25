@@ -5,6 +5,8 @@
     const _templateBase = './scripts';
     const app = angular.module('app', ['ngRoute', 'ngMaterial', 'ngAnimate']);
 
+    
+
     app.config(['$locationProvider', function($locationProvider) {
         // html5Mode(true) with the <base> tag seems to destroy routing and i cant make it work. 
         $locationProvider.html5Mode(false).hashPrefix('!');

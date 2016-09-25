@@ -5,6 +5,7 @@ const path = require('path');
 const restify = require('restify');
 const storage = require('electron-json-storage');
 const batch = require('azure-batch');
+const client = require('./client-proxy.js');
 const Q = require('Q');
 
 let mainWindow = null;
@@ -25,12 +26,13 @@ function createWindow() {
         autoHideMenuBar: true,
         webPreferences: {
             preload: path.resolve(path.join(__dirname, 'assets/preload.js')), // force the BrowserWindow to preload jQuery for AAD
-            nodeIntegration: false
+            nodeIntegration: true
         }
     });
 
     // Tell Electron where to load the entry point from
     mainWindow.loadURL('file://' + __dirname + '/index.html');
+    mainWindow.batchClient = client;
 
     // Clear out the main window when the app is closed
     mainWindow.on('closed', function () {
