@@ -5,6 +5,8 @@ First look into building an Electron app with Angular and Node.js
 Install all the dependancies for this application
 
 ### pre-install steps
+Install Node.js from <https://nodejs.org/en/download/>. also make sure you update npm to the latest current version: *npm install npm -g*
+
 * npm install -g bower
 * npm install -g less
 
@@ -15,6 +17,8 @@ Install all the dependancies for this application
 
 ### install the node dependencies for the app runtime
 4. npm install 
+
+Add the node_modules bin folder to the path environment setting: <path-to-repo>\electron-test\node_modules\.bin
 
 ## running the electron app
 Open the electron-test folder in Visual Studio Code.
