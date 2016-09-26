@@ -34,15 +34,20 @@ gulp.task('clean', function (callback) {
 });
 
 // copy files into build directory
+// todo: this is wrong .... 
 gulp.task('copy', ['clean', 'build-less'], function () { 
-    return projectDir.copyAsync('app', destDir.path(), { 
-        overwrite: true, matching: [ 
-            './node_modules/**/*', 
-            './assets/**/*', 
-            '*.html', 
-            '*.css', 
-            'main.js', 
-            'package.json' 
+    return projectDir.copyAsync('.', destDir.path(), { 
+        overwrite: true, matching: [
+            'main.js',
+            './app/api/**/*', 
+            './app/assets/preload.js', 
+            './app/assets/images/**/*',
+            './app/assets/css/app.css',
+            './app/assets/vendor/vendor.js',
+            './app/scripts/site.js',  
+            './app/scripts/**/*.html',  
+            './app/package.json',
+            './app/index.html'
        ] 
     }); 
 });
