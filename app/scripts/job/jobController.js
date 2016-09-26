@@ -2,8 +2,8 @@
 (function () {
     'use strict';
 
-    var batch = require("./batch-client");
-
+    // import the injected batchClient proxy    
+    const batchClient = require("./api/batch/batch-client");
 
     angular
         .module('app')
@@ -17,40 +17,43 @@
     
     function JobController(jobService, $q, $scope, $http) {
         var self = this;
-        self.jobs = [];
+        self.jobs = null;
         self.selected = {};
         self.account = {};
         self.filterText = null;
         self.selectJob = function (job, index) {
-            self.selected = angular.isNumber(index) ? self.jobs[index] : job;
+            self.selected = angular.isNumber(index) ? $scope.jobs[index] : job;
         };
 
         $scope.$on("accountSelected", function(event, account) {
-            console.log("accountSelected::JobController - ", account);
             self.account = account;
             loadJobs();
         });
 
         function loadJobs() {
-
-            console.log("batch: ", batch.batchClient);
-
             if (!self.account.key) {
                 console.log("loadJobs():error: account not set")
                 return;
             }
 
-            $http.get(jobsUrl(self.account)).then(
-                function (response) {
-                    self.jobs = response.data; 
-                }, function (error) {
-                    console.log("loadJobs():error: ", error)
+            const options = {
+                url: self.account.url,
+                account: self.account.name,
+                key: self.account.key,
+                jobListOptions: {
+                    maxResults : 25,
+                    select: "id,displayName,state,creationTime,poolInfo"
                 }
-            );
-        }
+            }
 
-        function jobsUrl(account) {
-            return "http://localhost:3000/jobs?account=" + account.name + "&key=" + encodeURIComponent(account.key) + "&url=" + account.url; 
+            batchClient.listJobs(options).then((data) => {
+                $scope.$apply(function () { 
+                    self.jobs = data;
+                    console.log("self.jobs.length: ", self.jobs.length);
+                });
+            }).catch((error) => {
+                console.log("loadJobs():error: ", error)
+            });
         }
     }
 })();

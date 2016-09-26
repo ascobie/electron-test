@@ -4,7 +4,7 @@
     <account-drop-down></account-drop-down>
     <md-list class="my-grid">
         <md-list-item md-ink-ripple="#03A9F4" ng-repeat="job in _ctrl.jobs" style="min-height:40px !important;padding:0px;border-bottom: 1px solid #CCC;">
-            <p ng-click="_ctrl.selectAccount(job, $index)" title="{{job.id}} - {{job.displayName}}">{{job.id}}</p>
+            <p ng-click="_ctrl.selectJob(job, $index)" title="{{job.id}} - {{job.displayName}}">{{job.id}}</p>
         </md-list-item>
     </md-list>
 </nav>

@@ -4,14 +4,11 @@ const { app, BrowserWindow } = electron;
 const path = require('path');
 const restify = require('restify');
 const storage = require('electron-json-storage');
-const batch = require('azure-batch');
-const client = require('./client-proxy.js');
+const clientProxy = require('./api/client-proxy');
 const Q = require('Q');
 
 let mainWindow = null;
 
-// Allows for live-reload while developing the app
-//require('electron-reload')(__dirname + '/build');
 require('electron-debug')({ 
     showDevTools: true 
 });
@@ -25,14 +22,16 @@ function createWindow() {
         height: 900,
         autoHideMenuBar: true,
         webPreferences: {
-            preload: path.resolve(path.join(__dirname, 'assets/preload.js')), // force the BrowserWindow to preload jQuery for AAD
+            preload: path.resolve(path.join(__dirname, './app/assets/preload.js')), // force the BrowserWindow to preload jQuery for AAD
             nodeIntegration: true
         }
     });
 
     // Tell Electron where to load the entry point from
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.batchClient = client;
+    mainWindow.loadURL('file://' + __dirname + '/app/index.html');
+    mainWindow.batchClient = clientProxy;
+
+    console.log("mainWindow.batchClient :: ", clientProxy.hello());
 
     // Clear out the main window when the app is closed
     mainWindow.on('closed', function () {
@@ -98,35 +97,6 @@ server.post('/accounts', (req, res, next) => {
         saveToStorage('accounts', accountArray.filter(item => item !== null)).then(function (response) {
             res.send(201);
         });
-    });
-});
-
-server.get('/jobs', (req, res, next) => {
-    console.log("/jobs: ", req.query)
-    const credentials = new batch.SharedKeyCredentials(req.query.account, req.query.key);
-    const client = new batch.ServiceClient(credentials, req.query.url);
-    const options = {}
-    options.jobListOptions = { 
-        maxResults : 25,
-        select: "id,displayName,state,creationTime,poolInfo"
-    };
-
-    client.job.list(options, function (error, result) {
-        var loop = function (nextLink) {
-            if (nextLink !== null && nextLink !== undefined) {
-                client.job.listNext(nextLink, function (err, res) {
-                    console.log("loop result: ", res);
-                    loop(res.odatanextLink);
-                });
-            }
-        };
-
-        if (error) throw error;
-        if (result) {
-            loop(result.odatanextLink);
-        }
-       
-        res.send(result);
     });
 });
 
